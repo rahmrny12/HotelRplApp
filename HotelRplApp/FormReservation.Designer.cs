@@ -48,8 +48,8 @@
             this.inputNIK = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.inputCheckOut = new System.Windows.Forms.DateTimePicker();
+            this.inputCheckIn = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.inputStaying = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -65,21 +65,22 @@
             this.dataGridSelectedRooms = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.inputItem = new System.Windows.Forms.ComboBox();
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridItem = new System.Windows.Forms.DataGridView();
+            this.inputSubTotal = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.inputPrice = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.inputQuantity = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.roomTypeTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.RoomTypeTableAdapter();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.ItemTableAdapter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
@@ -90,15 +91,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAvailableRooms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSelectedRooms)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridItem)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.dataGridCustomer);
             this.groupBox1.Controls.Add(this.inputDateOfBirth);
             this.groupBox1.Controls.Add(this.inputGender);
             this.groupBox1.Controls.Add(this.inputSearchCustomer);
@@ -115,6 +115,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.inputNIK);
             this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.dataGridCustomer);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(585, 260);
@@ -299,8 +300,8 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.dateTimePicker3);
-            this.groupBox2.Controls.Add(this.dateTimePicker2);
+            this.groupBox2.Controls.Add(this.inputCheckOut);
+            this.groupBox2.Controls.Add(this.inputCheckIn);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.inputStaying);
             this.groupBox2.Controls.Add(this.label2);
@@ -312,23 +313,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Reservation\'s Information";
             // 
-            // dateTimePicker3
+            // inputCheckOut
             // 
-            this.dateTimePicker3.CustomFormat = "dd MMM yyyy";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(140, 89);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(291, 22);
-            this.dateTimePicker3.TabIndex = 24;
+            this.inputCheckOut.CustomFormat = "dd MMM yyyy";
+            this.inputCheckOut.Enabled = false;
+            this.inputCheckOut.Location = new System.Drawing.Point(140, 89);
+            this.inputCheckOut.Name = "inputCheckOut";
+            this.inputCheckOut.Size = new System.Drawing.Size(291, 22);
+            this.inputCheckOut.TabIndex = 24;
             // 
-            // dateTimePicker2
+            // inputCheckIn
             // 
-            this.dateTimePicker2.CustomFormat = "dd MMM yyyy";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(139, 29);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(291, 22);
-            this.dateTimePicker2.TabIndex = 23;
+            this.inputCheckIn.CustomFormat = "dd MMM yyyy";
+            this.inputCheckIn.Location = new System.Drawing.Point(139, 29);
+            this.inputCheckIn.Name = "inputCheckIn";
+            this.inputCheckIn.Size = new System.Drawing.Size(291, 22);
+            this.inputCheckIn.TabIndex = 23;
             // 
             // label3
             // 
@@ -348,6 +348,7 @@
             this.inputStaying.Name = "inputStaying";
             this.inputStaying.Size = new System.Drawing.Size(291, 22);
             this.inputStaying.TabIndex = 3;
+            this.inputStaying.TextChanged += new System.EventHandler(this.inputStaying_TextChanged);
             // 
             // label2
             // 
@@ -434,6 +435,7 @@
             // 
             // dataGridAvailableRooms
             // 
+            this.dataGridAvailableRooms.AllowUserToAddRows = false;
             this.dataGridAvailableRooms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridAvailableRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridAvailableRooms.Location = new System.Drawing.Point(25, 309);
@@ -444,6 +446,7 @@
             // 
             // dataGridSelectedRooms
             // 
+            this.dataGridSelectedRooms.AllowUserToAddRows = false;
             this.dataGridSelectedRooms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridSelectedRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridSelectedRooms.Location = new System.Drawing.Point(603, 309);
@@ -466,13 +469,14 @@
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Controls.Add(this.dataGridView1);
-            this.groupBox4.Controls.Add(this.textBox4);
+            this.groupBox4.Controls.Add(this.btnAddItem);
+            this.groupBox4.Controls.Add(this.inputItem);
+            this.groupBox4.Controls.Add(this.dataGridItem);
+            this.groupBox4.Controls.Add(this.inputSubTotal);
             this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.inputPrice);
             this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.inputQuantity);
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Location = new System.Drawing.Point(25, 485);
@@ -481,6 +485,114 @@
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Request Additional Items";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Location = new System.Drawing.Point(622, 89);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(85, 40);
+            this.btnAddItem.TabIndex = 34;
+            this.btnAddItem.Text = "Add";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // inputItem
+            // 
+            this.inputItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputItem.DataSource = this.itemBindingSource;
+            this.inputItem.DisplayMember = "Name";
+            this.inputItem.FormattingEnabled = true;
+            this.inputItem.Location = new System.Drawing.Point(96, 34);
+            this.inputItem.Name = "inputItem";
+            this.inputItem.Size = new System.Drawing.Size(262, 24);
+            this.inputItem.TabIndex = 28;
+            this.inputItem.ValueMember = "ID";
+            this.inputItem.SelectedIndexChanged += new System.EventHandler(this.inputItem_SelectedIndexChanged);
+            // 
+            // itemBindingSource
+            // 
+            this.itemBindingSource.DataMember = "Item";
+            this.itemBindingSource.DataSource = this.dB_HOTEL_RPLDataSet;
+            // 
+            // dataGridItem
+            // 
+            this.dataGridItem.AllowUserToAddRows = false;
+            this.dataGridItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridItem.Location = new System.Drawing.Point(14, 91);
+            this.dataGridItem.Name = "dataGridItem";
+            this.dataGridItem.RowTemplate.Height = 24;
+            this.dataGridItem.Size = new System.Drawing.Size(602, 119);
+            this.dataGridItem.TabIndex = 34;
+            this.dataGridItem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItem_CellContentClick);
+            // 
+            // inputSubTotal
+            // 
+            this.inputSubTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inputSubTotal.Enabled = false;
+            this.inputSubTotal.Location = new System.Drawing.Point(472, 61);
+            this.inputSubTotal.Name = "inputSubTotal";
+            this.inputSubTotal.Size = new System.Drawing.Size(236, 22);
+            this.inputSubTotal.TabIndex = 32;
+            this.inputSubTotal.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(380, 63);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(77, 17);
+            this.label16.TabIndex = 31;
+            this.label16.Text = "Sub Total :";
+            // 
+            // inputPrice
+            // 
+            this.inputPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inputPrice.Enabled = false;
+            this.inputPrice.Location = new System.Drawing.Point(472, 34);
+            this.inputPrice.Name = "inputPrice";
+            this.inputPrice.Size = new System.Drawing.Size(236, 22);
+            this.inputPrice.TabIndex = 30;
+            this.inputPrice.TextChanged += new System.EventHandler(this.inputPrice_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(380, 35);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(48, 17);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "Price :";
+            // 
+            // inputQuantity
+            // 
+            this.inputQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.inputQuantity.Location = new System.Drawing.Point(96, 62);
+            this.inputQuantity.Name = "inputQuantity";
+            this.inputQuantity.Size = new System.Drawing.Size(262, 22);
+            this.inputQuantity.TabIndex = 28;
+            this.inputQuantity.TextChanged += new System.EventHandler(this.inputQuantity_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 64);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(69, 17);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "Quantity :";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 36);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 17);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Item :";
             // 
             // button1
             // 
@@ -506,71 +618,6 @@
             // 
             this.roomTypeTableAdapter.ClearBeforeFill = true;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 36);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 17);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Item :";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(96, 62);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(262, 22);
-            this.textBox2.TabIndex = 28;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 64);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(69, 17);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "Quantity :";
-            // 
-            // textBox3
-            // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Location = new System.Drawing.Point(472, 34);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(236, 22);
-            this.textBox3.TabIndex = 30;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(380, 35);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(48, 17);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "Price :";
-            // 
-            // textBox4
-            // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Location = new System.Drawing.Point(472, 61);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(236, 22);
-            this.textBox4.TabIndex = 32;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(380, 63);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(77, 17);
-            this.label16.TabIndex = 31;
-            this.label16.Text = "Sub Total :";
-            // 
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -590,34 +637,6 @@
             this.button3.TabIndex = 28;
             this.button3.Text = "Submit";
             this.button3.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 91);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(694, 119);
-            this.dataGridView1.TabIndex = 34;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.DataSource = this.itemBindingSource;
-            this.comboBox1.DisplayMember = "Name";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(96, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(262, 24);
-            this.comboBox1.TabIndex = 28;
-            this.comboBox1.ValueMember = "ID";
-            // 
-            // itemBindingSource
-            // 
-            this.itemBindingSource.DataMember = "Item";
-            this.itemBindingSource.DataSource = this.dB_HOTEL_RPLDataSet;
             // 
             // itemTableAdapter
             // 
@@ -657,8 +676,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSelectedRooms)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -696,8 +715,8 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DateTimePicker inputDateOfBirth;
         private System.Windows.Forms.ComboBox inputGender;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker inputCheckOut;
+        private System.Windows.Forms.DateTimePicker inputCheckIn;
         private System.Windows.Forms.DataGridView dataGridCustomer;
         private System.Windows.Forms.ComboBox inputRoomType;
         private System.Windows.Forms.Button button1;
@@ -705,18 +724,19 @@
         private DB_HOTEL_RPLDataSet dB_HOTEL_RPLDataSet;
         private System.Windows.Forms.BindingSource roomTypeBindingSource;
         private DB_HOTEL_RPLDataSetTableAdapters.RoomTypeTableAdapter roomTypeTableAdapter;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox inputSubTotal;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox inputPrice;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox inputQuantity;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridView dataGridItem;
+        private System.Windows.Forms.ComboBox inputItem;
         private System.Windows.Forms.BindingSource itemBindingSource;
         private DB_HOTEL_RPLDataSetTableAdapters.ItemTableAdapter itemTableAdapter;
+        private System.Windows.Forms.Button btnAddItem;
     }
 }

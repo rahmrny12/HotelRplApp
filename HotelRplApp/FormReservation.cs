@@ -15,6 +15,7 @@ namespace HotelRplApp
     {
         DataTable tableAvailableRoom;
         DataTable tableSelectedRoom;
+        DataTable tableAdditionalItems = new DataTable();
 
         public FormReservation()
         {
@@ -66,7 +67,8 @@ namespace HotelRplApp
             {
                 MessageBox.Show(ex.Message.ToString());
                 throw;
-            } finally
+            }
+            finally
             {
                 conn.Close();
 
@@ -88,17 +90,17 @@ namespace HotelRplApp
                 tableSelectedRoom.Rows.Add(newRow);
                 tableSelectedRoom.AcceptChanges();
 
-                //var index = dataGridSelectedRooms.Rows.Add();
-                //dataGridSelectedRooms.Rows[index].Cells["ID"].Value = row.Cells["ID"].Value;
-                //dataGridSelectedRooms.Rows[index].Cells["RoomNumber"].Value = row.Cells["RoomNumber"].Value;
-                //dataGridSelectedRooms.Rows[index].Cells["RoomFloor"].Value = row.Cells["RoomFloor"].Value;
-                //dataGridSelectedRooms.Rows[index].Cells["RoomPrice"].Value = row.Cells["RoomPrice"].Value;
-                //dataGridSelectedRooms.Rows[index].Cells["Description"].Value = row.Cells["Description"].Value;
-                //dataGridAvailableRooms.Rows.Remove(row);
-
                 dataGridAvailableRooms.Rows.Remove(row);
-
             }
+
+            //var index = dataGridSelectedRooms.Rows.Add();
+            //dataGridSelectedRooms.Rows[index].Cells["ID"].Value = row.Cells["ID"].Value;
+            //dataGridSelectedRooms.Rows[index].Cells["RoomNumber"].Value = row.Cells["RoomNumber"].Value;
+            //dataGridSelectedRooms.Rows[index].Cells["RoomFloor"].Value = row.Cells["RoomFloor"].Value;
+            //dataGridSelectedRooms.Rows[index].Cells["RoomPrice"].Value = row.Cells["RoomPrice"].Value;
+            //dataGridSelectedRooms.Rows[index].Cells["Description"].Value = row.Cells["Description"].Value;
+            //dataGridAvailableRooms.Rows.Remove(row);
+
         }
 
         private void FormReservation_Load(object sender, EventArgs e)
@@ -108,6 +110,19 @@ namespace HotelRplApp
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.RoomType' table. You can move, or remove it, as needed.
             this.roomTypeTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.RoomType);
 
+            tableAdditionalItems.Columns.Add("ItemID");
+            tableAdditionalItems.Columns.Add("Item");
+            tableAdditionalItems.Columns.Add("Quantity");
+            tableAdditionalItems.Columns.Add("Price");
+            tableAdditionalItems.Columns.Add("Sub Total");
+
+            dataGridItem.DataSource = tableAdditionalItems;
+            DataGridViewButtonColumn removeItemBtn = new DataGridViewButtonColumn();
+            removeItemBtn.HeaderText = "Option";
+            removeItemBtn.Text = "Remove";
+            removeItemBtn.Name = "RemoveItem";
+            removeItemBtn.UseColumnTextForButtonValue = true;
+            dataGridItem.Columns.Insert(5, removeItemBtn);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -124,6 +139,8 @@ namespace HotelRplApp
                 newRow["Description"] = row.Cells["Description"].Value;
                 tableAvailableRoom.Rows.Add(newRow);
                 tableAvailableRoom.AcceptChanges();
+
+                dataGridSelectedRooms.Rows.Remove(row);
             }
 
             //var index = dataGridAvailableRooms.Rows.Add();
@@ -132,7 +149,7 @@ namespace HotelRplApp
             //dataGridAvailableRooms.Rows[index].Cells["RoomFloor"].Value = row.Cells["RoomFloor"].Value;
             //dataGridAvailableRooms.Rows[index].Cells["RoomPrice"].Value = row.Cells["RoomPrice"].Value;
             //dataGridAvailableRooms.Rows[index].Cells["Description"].Value = row.Cells["Description"].Value;
-            dataGridSelectedRooms.Rows.Remove(row);
+            //dataGridSelectedRooms.Rows.Remove(row);
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -140,19 +157,88 @@ namespace HotelRplApp
 
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void inputPrice_TextChanged(object sender, EventArgs e)
         {
+            if (inputQuantity.Text != "" && inputPrice.Text != "")
+            {
+                int subtotal = int.Parse(inputQuantity.Text) * int.Parse(inputPrice.Text);
 
+                inputSubTotal.Text = subtotal.ToString();
+            }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void inputQuantity_TextChanged(object sender, EventArgs e)
         {
+            getSubtotal();
+        }
 
+        private void getSubtotal()
+        {
+            if (inputQuantity.Text != "" && inputPrice.Text != "")
+            {
+                int subtotal = int.Parse(inputQuantity.Text) * int.Parse(inputPrice.Text);
+
+                inputSubTotal.Text = subtotal.ToString();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            DataRow row = tableAdditionalItems.NewRow();
+            row["ItemID"] = inputItem.SelectedValue;
+            row["Item"] = inputItem.Text;
+            row["Quantity"] = inputQuantity.Text;
+            row["Price"] = inputPrice.Text;
+            row["Sub Total"] = int.Parse(inputPrice.Text) * int.Parse(inputQuantity.Text);
+            tableAdditionalItems.Rows.Add(row);
+            tableAdditionalItems.AcceptChanges();
+        }
+
+        private void inputItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection conn = Helper.getConnected();
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Item WHERE ID='" + inputItem.SelectedValue + "'", conn);
+                SqlDataReader item = cmd.ExecuteReader();
+                if (item.Read())
+                {
+                    inputPrice.Text = item["RequestPrice"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void dataGridItem_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (dataGridItem.Rows[e.RowIndex].Cells[e.ColumnIndex].OwningColumn.Name == "RemoveItem")
+                {
+                    dataGridItem.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+        }
+
+        private void inputStaying_TextChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(inputCheckIn.Value.ToLongDateString().ToString());
+            MessageBox.Show(inputCheckIn.Value.ToShortDateString().ToString());
+            MessageBox.Show(inputCheckIn.Value.AddDays(1).ToLongDateString().ToString());
         }
     }
 }
