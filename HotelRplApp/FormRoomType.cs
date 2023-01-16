@@ -14,7 +14,7 @@ namespace HotelRplApp
     public partial class FormRoomType : Form
     {
         // path folder project ini
-        string uploadDir = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+        string projectDir = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
 
         public FormRoomType()
         {
@@ -79,7 +79,7 @@ namespace HotelRplApp
         {
             openPhotoDialog.InitialDirectory = "C://Desktop";
             openPhotoDialog.Title = "Select a room type photo";
-            openPhotoDialog.Filter = "Image Only(*.jpg; *.jpeg; *.png)|*.jpg; *.jpeg; *.png";
+            openPhotoDialog.Filter = "Image Only(*.jpg; *.jpeg; *.png)|*.jpg; *.jpeg; *.png;";
             openPhotoDialog.FilterIndex = 1;
             try
             {
@@ -88,8 +88,8 @@ namespace HotelRplApp
                     if (openPhotoDialog.CheckFileExists)
                     {
                         string path = System.IO.Path.GetFullPath(openPhotoDialog.FileName);
-                        labelPath.Visible = true;
                         labelPath.Text = path;
+                        labelPath.Visible = true;
                         pictureBoxPhoto.Image = new Bitmap(openPhotoDialog.FileName);
                     }
                 }
@@ -111,6 +111,7 @@ namespace HotelRplApp
         {
             refreshData();
             lockComponents();
+            openPhotoDialog.FileName = "";
         }
 
         private void dataGridViewRoomType_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -124,7 +125,7 @@ namespace HotelRplApp
                 btnUpdate.Tag = dataGridRoomType.Rows[e.RowIndex].Cells["ID"].Value.ToString();
                 btnDelete.Tag = dataGridRoomType.Rows[e.RowIndex].Cells["ID"].Value.ToString();
 
-                pictureBoxPhoto.ImageLocation = uploadDir + dataGridRoomType.Rows[e.RowIndex].Cells[4].Value.ToString();
+                pictureBoxPhoto.ImageLocation = projectDir + dataGridRoomType.Rows[e.RowIndex].Cells[4].Value.ToString();
             }
         }
 
@@ -149,16 +150,19 @@ namespace HotelRplApp
         public void insertData()
         {
             SqlConnection conn = Helper.getConnected();
-            // ambil nama file
-            string filename = System.IO.Path.GetFileName(openPhotoDialog.FileName);
+            // randomize nama file
+            string extension = System.IO.Path.GetExtension(openPhotoDialog.FileName);
+            string newFileName = Guid.NewGuid().ToString() + extension;
             // copy gambar ke folder image
-            System.IO.File.Copy(openPhotoDialog.FileName, uploadDir + "\\Image\\RoomType\\" + filename);
+            System.IO.File.Copy(openPhotoDialog.FileName, projectDir + "\\Image\\RoomType\\" + newFileName);
+
+            openPhotoDialog.FileName = "";
 
             try
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO RoomType " +
-                    "VALUES ('" + inputName.Text + "', '" + inputCapacity.Text + "', '" + inputRoomPrice.Text + "', '\\Image\\RoomType\\" + filename + "')", conn);
+                    "VALUES ('" + inputName.Text + "', '" + inputCapacity.Text + "', '" + inputRoomPrice.Text + "', '\\Image\\RoomType\\" + newFileName + "')", conn);
 
                 cmd.ExecuteNonQuery();
 
@@ -179,12 +183,33 @@ namespace HotelRplApp
 
         public void updateData()
         {
+            string oldImage = dataGridRoomType.CurrentRow.Cells["Photo"].Value.ToString();
+            string uploadDir = oldImage;
+
+            if (openPhotoDialog.FileName != "")
+            {
+                // hapus gambar lama
+                System.IO.File.Delete(projectDir + oldImage);
+
+                // nama file baru
+                string extension = System.IO.Path.GetExtension(openPhotoDialog.FileName);
+                string newFileName = Guid.NewGuid().ToString() + extension;
+                uploadDir = "\\Image\\RoomType\\" + newFileName;
+
+                // copy gambar baru
+                System.IO.File.Copy(openPhotoDialog.FileName, projectDir + uploadDir);
+
+                openPhotoDialog.FileName = "";
+            }
+
+            MessageBox.Show(uploadDir);
+
             SqlConnection conn = Helper.getConnected();
 
             try
-            {
+                {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE RoomType SET Name='" + inputName.Text + "', Capacity='" + inputCapacity.Text + "', RoomPrice='" + inputRoomPrice.Text + "' WHERE ID='" + btnUpdate.Tag + "'", conn);
+                SqlCommand cmd = new SqlCommand("UPDATE RoomType SET Name='" + inputName.Text + "', Capacity='" + inputCapacity.Text + "', RoomPrice='" + inputRoomPrice.Text + "', Photo='" + uploadDir + "' WHERE ID='" + btnUpdate.Tag + "'", conn);
                 cmd.ExecuteNonQuery();
 
                 refreshData();
@@ -204,6 +229,9 @@ namespace HotelRplApp
 
         public void deleteData()
         {
+            // delete image
+            System.IO.File.Delete(projectDir + dataGridRoomType.CurrentRow.Cells["Photo"].Value.ToString());
+
             SqlConnection conn = Helper.getConnected();
 
             try
@@ -247,7 +275,7 @@ namespace HotelRplApp
         {
             if (btnDelete.Tag != null)
             {
-                if (MessageBox.Show("Are you sure to delete this room type?", "Delete room type", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure to delete this room type? All room with this type will be deleted too.", "Delete room type", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     deleteData();
                 }

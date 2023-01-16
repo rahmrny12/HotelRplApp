@@ -324,6 +324,7 @@
             this.dataGridEmployee.RowTemplate.Height = 24;
             this.dataGridEmployee.Size = new System.Drawing.Size(677, 206);
             this.dataGridEmployee.TabIndex = 22;
+            this.dataGridEmployee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEmployee_CellClick);
             // 
             // openFileDialog
             // 
@@ -356,6 +357,7 @@
             this.Controls.Add(this.inputUsername);
             this.Controls.Add(this.label1);
             this.Name = "FormEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormEmployee";
             this.Load += new System.EventHandler(this.FormEmployee_Load);
             this.groupBox1.ResumeLayout(false);

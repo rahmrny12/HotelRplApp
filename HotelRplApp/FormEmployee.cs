@@ -14,6 +14,8 @@ namespace HotelRplApp
 {
     public partial class FormEmployee : Form
     {
+        private string projectDir = Application.StartupPath.Substring(0, Application.StartupPath.Length - 10);
+
         public FormEmployee()
         {
             InitializeComponent();
@@ -53,7 +55,7 @@ namespace HotelRplApp
             btnSave.Enabled = true;
         }
 
-        void refreshData()
+        void refreshEmployee()
         {
             SqlConnection conn = Helper.getConnected();
             try
@@ -86,7 +88,7 @@ namespace HotelRplApp
         private void FormEmployee_Load(object sender, EventArgs e)
         {
             lockComponents();
-            refreshData();
+            refreshEmployee();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -97,7 +99,35 @@ namespace HotelRplApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (btnDelete.Tag != null)
+            {
+                if (MessageBox.Show("Are you sure to delete this employee?", "Delete employee", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    string oldImage = dataGridEmployee.CurrentRow.Cells["Photo"].Value.ToString();
+                    System.IO.File.Delete(oldImage);
 
+                    SqlConnection conn = Helper.getConnected();
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("DELETE FROM Employee WHERE ID='" + btnDelete.Tag + "'", conn);
+
+                        cmd.ExecuteNonQuery();
+                        refreshEmployee();
+
+                        MessageBox.Show("Employee deleted successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                        throw;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Click any room you want to delete.");
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -114,37 +144,93 @@ namespace HotelRplApp
                     }
                     break;
                 case "update":
-                    //updateData();
+                    updateData();
                     break;
                 default:
                     break;
             }
+            lockComponents();
         }
 
         void insertData()
         {
-            MemoryStream stream = new MemoryStream();
-            pictureBoxPhoto.Image.Save(stream, pictureBoxPhoto.Image.RawFormat);
-            byte[] photo = stream.ToArray();
+            if (inputPassword.Text == inputConfirmPass.Text)
+            {
+                string extension = System.IO.Path.GetExtension(openFileDialog.FileName);
+                string newFileName = Guid.NewGuid() + extension;
+                string uploadDir = "\\Image\\Employee\\" + newFileName;
+                System.IO.File.Copy(openFileDialog.FileName, projectDir + uploadDir);
+
+                SqlConnection conn = Helper.getConnected();
+                try
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Employee VALUES('"
+                        + inputUsername.Text + "', '"
+                        + inputPassword.Text + "', '"
+                        + inputName.Text + "', '"
+                        + inputEmail.Text + "', '"
+                        + inputAddress.Text + "', '"
+                        + inputDateOfBirth.Text + "', '"
+                        + inputJob.Text + "', '"
+                        + uploadDir + "')", conn);
+
+                    cmd.ExecuteNonQuery();
+                    refreshEmployee();
+
+                    MessageBox.Show("New employee added successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    throw;
+                }
+                finally
+                {
+                    conn.Close();
+
+                }
+            } else
+            {
+                MessageBox.Show("Password confirmation not valid!");
+            }
+        }
+
+        void updateData()
+        {
+            string oldImage = dataGridEmployee.CurrentRow.Cells["Photo"].Value.ToString();
+            string uploadDir = oldImage;
+
+            if (openFileDialog.FileName != null)
+            {
+                System.IO.File.Delete(uploadDir);
+
+                string extension = System.IO.Path.GetExtension(openFileDialog.FileName);
+                string newFileName = Guid.NewGuid() + extension;
+                uploadDir = "\\Image\\Employee\\" + newFileName;
+                System.IO.File.Copy(openFileDialog.FileName, projectDir + uploadDir);
+            }
 
             SqlConnection conn = Helper.getConnected();
             try
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO Employee VALUES('"
-                    + inputUsername.Text + "', '"
-                    + inputPassword.Text + "', '"
-                    + inputName.Text + "', '"
-                    + inputEmail.Text + "', '"
-                    + inputAddress.Text + "', '"
-                    + inputDateOfBirth.Text + "', '"
-                    + inputJob.Text + "', '"
-                    + photo + "')", conn);
+                SqlCommand cmd = new SqlCommand("UPDATE Employee SET Username='"
+                    + inputUsername.Text + "', Password='"
+                    + inputPassword.Text + "', Name='"
+                    + inputName.Text + "', Email='"
+                    + inputEmail.Text + "', Address='"
+                    + inputAddress.Text + "', DateOfBirth='"
+                    + inputDateOfBirth.Text + "', JobID='"
+                    + inputJob.Text + "', Photo='"
+                    + uploadDir + "' WHERE ID='" + btnUpdate.Tag + "'", conn);
 
-                MessageBox.Show(cmd.CommandText);
                 cmd.ExecuteNonQuery();
-                refreshData();
+                refreshEmployee();
+
+                MessageBox.Show("Employee updated successfully!");
             }
             catch (Exception ex)
             {
@@ -162,7 +248,7 @@ namespace HotelRplApp
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBoxPhoto.Image = Image.FromFile(openFileDialog.FileName);
+                pictureBoxPhoto.Image = new Bitmap(openFileDialog.FileName);
                 pictureBoxPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -170,6 +256,24 @@ namespace HotelRplApp
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dataGridEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                inputUsername.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Username"].Value.ToString();
+                inputPassword.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Password"].Value.ToString();
+                inputName.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Name"].Value.ToString();
+                inputEmail.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Email"].Value.ToString();
+                inputAddress.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Address"].Value.ToString();
+                inputDateOfBirth.Text = dataGridEmployee.Rows[e.RowIndex].Cells["DateOfBirth"].Value.ToString();
+                inputJob.Text = dataGridEmployee.Rows[e.RowIndex].Cells["JobID"].Value.ToString();
+                pictureBoxPhoto.ImageLocation = dataGridEmployee.Rows[e.RowIndex].Cells["Photo"].Value.ToString();
+
+                btnUpdate.Tag = dataGridEmployee.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+                btnDelete.Tag = dataGridEmployee.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+            }
         }
     }
 }

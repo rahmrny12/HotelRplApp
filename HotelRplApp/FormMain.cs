@@ -74,5 +74,35 @@ namespace HotelRplApp
         {
             Application.Exit();
         }
+
+        private void roomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRoom formRoom = new FormRoom();
+            formRoom.ShowDialog();
+        }
+
+        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEmployee formEmployee = new FormEmployee();
+            formEmployee.ShowDialog();
+        }
+
+        private void itemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormItem formItem = new FormItem();
+            formItem.ShowDialog();
+        }
+
+        private void foodAndDrinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFoodAndDrink formFoodAndDrink = new FormFoodAndDrink();
+            formFoodAndDrink.ShowDialog();
+        }
+
+        private void reservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReservation formReservation = new FormReservation();
+            formReservation.Show();
+        }
     }
 }

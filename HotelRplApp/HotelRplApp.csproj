@@ -57,6 +57,18 @@
     <Compile Include="FormEmployee.Designer.cs">
       <DependentUpon>FormEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormFoodAndDrink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFoodAndDrink.Designer.cs">
+      <DependentUpon>FormFoodAndDrink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormItem.Designer.cs">
+      <DependentUpon>FormItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +80,12 @@
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReservation.Designer.cs">
+      <DependentUpon>FormReservation.cs</DependentUpon>
     </Compile>
     <Compile Include="FormRoom.cs">
       <SubType>Form</SubType>
@@ -88,11 +106,20 @@
     <EmbeddedResource Include="FormEmployee.resx">
       <DependentUpon>FormEmployee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormFoodAndDrink.resx">
+      <DependentUpon>FormFoodAndDrink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormItem.resx">
+      <DependentUpon>FormItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReservation.resx">
+      <DependentUpon>FormReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRoom.resx">
       <DependentUpon>FormRoom.cs</DependentUpon>
@@ -141,6 +168,8 @@
     <None Include="Resources\login.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Image\Employee\" />
+    <Folder Include="Image\FoodsAndDrinks\" />
     <Folder Include="Image\RoomType\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
