@@ -9,6 +9,7 @@ namespace HotelRplApp
 {
     static class LoggedInUser
     {
+        public static string UserID = "1";
         public static string Name;
         public static string Username;
         public static string JobID;

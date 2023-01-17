@@ -32,14 +32,14 @@ namespace HotelRplApp
 
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void optionAddNew_CheckedChanged(object sender, EventArgs e)
         {
             dataGridCustomer.Visible = true;
             labelSearch.Visible = true;
             inputSearchCustomer.Visible = true;
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void optionSearch_CheckedChanged(object sender, EventArgs e)
         {
             dataGridCustomer.Visible = false;
             labelSearch.Visible = false;
@@ -52,7 +52,7 @@ namespace HotelRplApp
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT Room.ID, RoomNumber, RoomFloor, RoomPrice, Description FROM Room JOIN RoomType ON Room.RoomTypeID = RoomType.ID WHERE RoomTypeID=" + inputRoomType.SelectedValue, conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, RoomNumber, RoomFloor, RoomPrice, Description FROM ViewRoom WHERE RoomTypeID=" + inputRoomType.SelectedValue, conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 tableAvailableRoom = new DataTable();
                 da.Fill(tableAvailableRoom);
@@ -62,6 +62,7 @@ namespace HotelRplApp
 
                 tableSelectedRoom = tableAvailableRoom.Clone();
                 dataGridSelectedRooms.DataSource = tableSelectedRoom;
+                dataGridSelectedRooms.Columns["ID"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -109,6 +110,8 @@ namespace HotelRplApp
             this.itemTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.Item);
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.RoomType' table. You can move, or remove it, as needed.
             this.roomTypeTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.RoomType);
+
+            refreshCustomer();
 
             tableAdditionalItems.Columns.Add("ItemID");
             tableAdditionalItems.Columns.Add("Item");
@@ -236,9 +239,121 @@ namespace HotelRplApp
 
         private void inputStaying_TextChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(inputCheckIn.Value.ToLongDateString().ToString());
-            MessageBox.Show(inputCheckIn.Value.ToShortDateString().ToString());
-            MessageBox.Show(inputCheckIn.Value.AddDays(1).ToLongDateString().ToString());
+            int durationNights = int.Parse(inputStaying.Text);
+            inputCheckOut.Text = inputCheckIn.Value.AddDays(1).ToLongDateString().ToString();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            String CustomerID;
+
+            if (optionAddNew.Checked)
+            {
+                CustomerID = insertNewCustomer();
+            }
+            else
+            {
+                CustomerID = dataGridCustomer.CurrentRow.Cells["ID"].Value.ToString();
+            }
+
+            insertNewReservation(CustomerID);
+            
+        }
+
+        private void insertNewReservation(string customerID)
+        {
+            SqlConnection conn = Helper.getConnected();
+            try
+            {
+                conn.Open();
+                string bookingCode = Helper.generateBookingCode();
+                MessageBox.Show(LoggedInUser.UserID);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reservation VALUES(" + inputCheckIn.Text + ", " + LoggedInUser.UserID + ", " + customerID + ", " + bookingCode + ")", conn);
+                MessageBox.Show(cmd.CommandText);
+                cmd.ExecuteNonQuery();
+
+                SqlCommand cmdReservationID = new SqlCommand("SELECT ID FROM Reservation WHERE BookingCode=" + bookingCode, conn);
+                SqlDataReader reservation = cmdReservationID.ExecuteReader();
+                reservation.Read();
+
+                foreach (DataGridViewRow room
+                    in dataGridSelectedRooms.Rows)
+                {
+                    SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom VALUES(" + reservation["ID"].ToString() + ", " + room.Cells["ID"] + ", " + inputCheckIn.Text + ", " + inputStaying.Text + ", " + room.Cells["RoomPrice"] + ", " + inputCheckIn.Text + ", " + inputCheckOut.Text + ")", conn);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+        }
+
+        private string insertNewCustomer()
+        {
+            SqlConnection conn = Helper.getConnected();
+            try
+            {
+                conn.Open();
+
+                int birthDate = int.Parse(inputDateOfBirth.Value.ToString("yyyyMMdd"));
+                int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                int age = (now - birthDate) / 10000;
+                SqlCommand cmd = new SqlCommand("INSERT INTO Customer VALUES('" + inputCustomerName.Text + "', '" + inputNIK.Text + "', '" + inputEmail.Text + "', '" + inputGender.Text + "', '" + inputPhoneNumber.Text + "', '" + age + "')", conn);
+                cmd.ExecuteNonQuery();
+
+                refreshCustomer();
+                SqlCommand cmdCustomerID = new SqlCommand("SELECT ID FROM Customer WHERE NIK=" + inputNIK.Text, conn);
+                SqlDataReader customer = cmdCustomerID.ExecuteReader();
+                customer.Read();
+
+                optionSearch.Checked = true;
+                MessageBox.Show("New customer added successfully");
+
+                return customer["ID"].ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void refreshCustomer()
+        {
+            SqlConnection conn = Helper.getConnected();
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Customer", conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridCustomer.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+
+            }
         }
     }
 }

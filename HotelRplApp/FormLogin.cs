@@ -28,6 +28,7 @@ namespace HotelRplApp
                 SqlDataReader user = cmd.ExecuteReader();
                 if (user.Read())
                 {
+                    LoggedInUser.UserID = user["ID"].ToString();
                     LoggedInUser.Name = user["Name"].ToString();
                     LoggedInUser.Username = user["Username"].ToString();
                     LoggedInUser.JobID = user["JobID"].ToString();

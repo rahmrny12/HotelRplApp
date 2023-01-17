@@ -30,13 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridCustomer = new System.Windows.Forms.DataGridView();
             this.inputDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.inputGender = new System.Windows.Forms.ComboBox();
             this.inputSearchCustomer = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.optionSearch = new System.Windows.Forms.RadioButton();
+            this.optionAddNew = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.inputPhoneNumber = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.inputNIK = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.dataGridCustomer = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.inputCheckOut = new System.Windows.Forms.DateTimePicker();
             this.inputCheckIn = new System.Windows.Forms.DateTimePicker();
@@ -80,7 +80,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.roomTypeTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.RoomTypeTableAdapter();
             this.label17 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
             this.itemTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.ItemTableAdapter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
@@ -99,12 +99,13 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.dataGridCustomer);
             this.groupBox1.Controls.Add(this.inputDateOfBirth);
             this.groupBox1.Controls.Add(this.inputGender);
             this.groupBox1.Controls.Add(this.inputSearchCustomer);
             this.groupBox1.Controls.Add(this.labelSearch);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.optionSearch);
+            this.groupBox1.Controls.Add(this.optionAddNew);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.inputPhoneNumber);
@@ -115,25 +116,12 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.inputNIK);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.dataGridCustomer);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(585, 260);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Customer\'s Information";
-            // 
-            // dataGridCustomer
-            // 
-            this.dataGridCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridCustomer.Location = new System.Drawing.Point(13, 64);
-            this.dataGridCustomer.Name = "dataGridCustomer";
-            this.dataGridCustomer.RowTemplate.Height = 24;
-            this.dataGridCustomer.Size = new System.Drawing.Size(559, 185);
-            this.dataGridCustomer.TabIndex = 26;
             // 
             // inputDateOfBirth
             // 
@@ -178,29 +166,29 @@
             this.labelSearch.TabIndex = 19;
             this.labelSearch.Text = "Search :";
             // 
-            // radioButton2
+            // optionSearch
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(114, 32);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(74, 21);
-            this.radioButton2.TabIndex = 18;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Search";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.optionSearch.AutoSize = true;
+            this.optionSearch.Checked = true;
+            this.optionSearch.Location = new System.Drawing.Point(114, 32);
+            this.optionSearch.Name = "optionSearch";
+            this.optionSearch.Size = new System.Drawing.Size(74, 21);
+            this.optionSearch.TabIndex = 18;
+            this.optionSearch.TabStop = true;
+            this.optionSearch.Text = "Search";
+            this.optionSearch.UseVisualStyleBackColor = true;
+            this.optionSearch.CheckedChanged += new System.EventHandler(this.optionAddNew_CheckedChanged);
             // 
-            // radioButton1
+            // optionAddNew
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(23, 31);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 21);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.Text = "Add New";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.optionAddNew.AutoSize = true;
+            this.optionAddNew.Location = new System.Drawing.Point(23, 31);
+            this.optionAddNew.Name = "optionAddNew";
+            this.optionAddNew.Size = new System.Drawing.Size(85, 21);
+            this.optionAddNew.TabIndex = 3;
+            this.optionAddNew.Text = "Add New";
+            this.optionAddNew.UseVisualStyleBackColor = true;
+            this.optionAddNew.CheckedChanged += new System.EventHandler(this.optionSearch_CheckedChanged);
             // 
             // label8
             // 
@@ -296,6 +284,18 @@
             this.label6.Size = new System.Drawing.Size(38, 17);
             this.label6.TabIndex = 8;
             this.label6.Text = "NIK :";
+            // 
+            // dataGridCustomer
+            // 
+            this.dataGridCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridCustomer.Location = new System.Drawing.Point(13, 64);
+            this.dataGridCustomer.Name = "dataGridCustomer";
+            this.dataGridCustomer.RowTemplate.Height = 24;
+            this.dataGridCustomer.Size = new System.Drawing.Size(559, 185);
+            this.dataGridCustomer.TabIndex = 26;
             // 
             // groupBox2
             // 
@@ -629,14 +629,15 @@
             this.label17.TabIndex = 33;
             this.label17.Text = "Total Price : 1400000";
             // 
-            // button3
+            // btnSubmit
             // 
-            this.button3.Location = new System.Drawing.Point(782, 528);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 40);
-            this.button3.TabIndex = 28;
-            this.button3.Text = "Submit";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSubmit.Location = new System.Drawing.Point(782, 528);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(107, 40);
+            this.btnSubmit.TabIndex = 28;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // itemTableAdapter
             // 
@@ -647,7 +648,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 713);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -704,8 +705,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox inputNIK;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton optionSearch;
+        private System.Windows.Forms.RadioButton optionAddNew;
         private System.Windows.Forms.TextBox inputSearchCustomer;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.Label label12;
@@ -732,7 +733,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.DataGridView dataGridItem;
         private System.Windows.Forms.ComboBox inputItem;
         private System.Windows.Forms.BindingSource itemBindingSource;
