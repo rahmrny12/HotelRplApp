@@ -162,15 +162,10 @@ namespace HotelRplApp
 
         private void inputPrice_TextChanged(object sender, EventArgs e)
         {
-            if (inputQuantity.Text != "" && inputPrice.Text != "")
-            {
-                int subtotal = int.Parse(inputQuantity.Text) * int.Parse(inputPrice.Text);
-
-                inputSubTotal.Text = subtotal.ToString();
-            }
+            getSubtotal();
         }
 
-        private void inputQuantity_TextChanged(object sender, EventArgs e)
+        private void inputQuantity_ValueChanged(object sender, EventArgs e)
         {
             getSubtotal();
         }
@@ -179,7 +174,7 @@ namespace HotelRplApp
         {
             if (inputQuantity.Text != "" && inputPrice.Text != "")
             {
-                int subtotal = int.Parse(inputQuantity.Text) * int.Parse(inputPrice.Text);
+                int subtotal = int.Parse(inputQuantity.Value.ToString()) * int.Parse(inputPrice.Text);
 
                 inputSubTotal.Text = subtotal.ToString();
             }
@@ -237,10 +232,13 @@ namespace HotelRplApp
             }
         }
 
-        private void inputStaying_TextChanged(object sender, EventArgs e)
+        private void inputStaying_ValueChanged(object sender, EventArgs e)
         {
-            int durationNights = int.Parse(inputStaying.Text);
-            inputCheckOut.Text = inputCheckIn.Value.AddDays(1).ToLongDateString().ToString();
+            if (inputStaying.Text != "")
+            {
+                int durationNights = int.Parse(inputStaying.Text);
+                inputCheckOut.Text = inputCheckIn.Value.AddDays(durationNights).ToLongDateString().ToString();
+            }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -256,44 +254,62 @@ namespace HotelRplApp
                 CustomerID = dataGridCustomer.CurrentRow.Cells["ID"].Value.ToString();
             }
 
-            insertNewReservation(CustomerID);
-            
+            if (dataGridSelectedRooms.Rows.Count != 0)
+            {
+                insertNewReservation(CustomerID);
+            }
+            else
+            {
+                MessageBox.Show("Select at least one room.");
+            }
+
         }
 
         private void insertNewReservation(string customerID)
         {
-            SqlConnection conn = Helper.getConnected();
-            try
+            //try
+            //{
+            using (SqlConnection conn = Helper.getConnected())
             {
                 conn.Open();
                 string bookingCode = Helper.generateBookingCode();
-                MessageBox.Show(LoggedInUser.UserID);
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reservation VALUES(" + inputCheckIn.Text + ", " + LoggedInUser.UserID + ", " + customerID + ", " + bookingCode + ")", conn);
-                MessageBox.Show(cmd.CommandText);
-                cmd.ExecuteNonQuery();
-
-                SqlCommand cmdReservationID = new SqlCommand("SELECT ID FROM Reservation WHERE BookingCode=" + bookingCode, conn);
-                SqlDataReader reservation = cmdReservationID.ExecuteReader();
+                SqlCommand cmdReservation = new SqlCommand("INSERT INTO Reservation OUTPUT inserted.ID VALUES('" + inputCheckIn.Text + "', '" + LoggedInUser.UserID + "', '" + customerID + "', '" + bookingCode + "')", conn);
+                SqlDataReader reservation = cmdReservation.ExecuteReader();
                 reservation.Read();
+                string reservationID = reservation["ID"].ToString();
+                reservation.Close();
 
                 foreach (DataGridViewRow room
                     in dataGridSelectedRooms.Rows)
                 {
-                    SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom VALUES(" + reservation["ID"].ToString() + ", " + room.Cells["ID"] + ", " + inputCheckIn.Text + ", " + inputStaying.Text + ", " + room.Cells["RoomPrice"] + ", " + inputCheckIn.Text + ", " + inputCheckOut.Text + ")", conn);
+                    SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom OUTPUT inserted.ID VALUES('" + reservationID + "', '" + room.Cells["ID"].Value + "', '" + inputCheckIn.Text + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '" + inputCheckIn.Text + "', '" + inputCheckOut.Text + "')", conn);
+                    SqlDataReader reservationRoom = cmdReservationRoom.ExecuteReader();
+                    reservationRoom.Read();
+                    string reservationRoomID = reservationRoom["ID"].ToString();
+                    reservationRoom.Close();
 
-                    cmd.ExecuteNonQuery();
+                    foreach (DataGridViewRow item in dataGridItem.Rows)
+                    {
+                        SqlCommand cmdAdditionalItem = new SqlCommand("INSERT INTO ReservationRequestItem VALUES('" + reservationRoomID + "', '" + item.Cells["ItemID"].Value + "', '" + item.Cells["Quantity"].Value + "', '" + item.Cells["Sub Total"].Value + "')", conn);
+                        MessageBox.Show(cmdAdditionalItem.CommandText);
+                        cmdAdditionalItem.ExecuteNonQuery();
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-                throw;
-            }
-            finally
-            {
-                conn.Close();
+
+                //foreach (DataGridViewRow item in dataGridItem.Rows)
+                //{
+                //    SqlCommand cmdReservationItem = new SqlCommand("INSERT INTO ReservationRequestItem VALUES('" +  + "')", conn);
+                //}
+
+                MessageBox.Show("New reservation added successfully!");
 
             }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message.ToString());
+            //    throw;
+            //}
         }
 
         private string insertNewCustomer()
@@ -354,6 +370,16 @@ namespace HotelRplApp
                 conn.Close();
 
             }
+        }
+
+        private void inputCheckOut_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inputCheckIn_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
