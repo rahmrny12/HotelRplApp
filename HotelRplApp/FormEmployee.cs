@@ -87,8 +87,12 @@ namespace HotelRplApp
 
         private void FormEmployee_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.Job' table. You can move, or remove it, as needed.
+            this.jobTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.Job);
             lockComponents();
             refreshEmployee();
+
+            openFileDialog.FileName = "";
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -138,7 +142,8 @@ namespace HotelRplApp
                     if (pictureBoxPhoto.Image != null)
                     {
                         insertData();
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("Select a profile image first!");
                     }
@@ -172,8 +177,8 @@ namespace HotelRplApp
                         + inputName.Text + "', '"
                         + inputEmail.Text + "', '"
                         + inputAddress.Text + "', '"
-                        + inputDateOfBirth.Text + "', '"
-                        + inputJob.Text + "', '"
+                        + inputDateOfBirth.Value + "', '"
+                        + inputJob.SelectedValue + "', '"
                         + uploadDir + "')", conn);
 
                     cmd.ExecuteNonQuery();
@@ -191,7 +196,8 @@ namespace HotelRplApp
                     conn.Close();
 
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Password confirmation not valid!");
             }
@@ -202,9 +208,12 @@ namespace HotelRplApp
             string oldImage = dataGridEmployee.CurrentRow.Cells["Photo"].Value.ToString();
             string uploadDir = oldImage;
 
-            if (openFileDialog.FileName != null)
+            if (openFileDialog.FileName != "")
             {
-                System.IO.File.Delete(uploadDir);
+                if (File.Exists(uploadDir))
+                {
+                    System.IO.File.Delete(uploadDir);
+                }
 
                 string extension = System.IO.Path.GetExtension(openFileDialog.FileName);
                 string newFileName = Guid.NewGuid() + extension;
@@ -223,7 +232,7 @@ namespace HotelRplApp
                     + inputName.Text + "', Email='"
                     + inputEmail.Text + "', Address='"
                     + inputAddress.Text + "', DateOfBirth='"
-                    + inputDateOfBirth.Text + "', JobID='"
+                    + inputDateOfBirth.Value + "', JobID='"
                     + inputJob.Text + "', Photo='"
                     + uploadDir + "' WHERE ID='" + btnUpdate.Tag + "'", conn);
 
@@ -268,11 +277,20 @@ namespace HotelRplApp
                 inputEmail.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Email"].Value.ToString();
                 inputAddress.Text = dataGridEmployee.Rows[e.RowIndex].Cells["Address"].Value.ToString();
                 inputDateOfBirth.Text = dataGridEmployee.Rows[e.RowIndex].Cells["DateOfBirth"].Value.ToString();
-                inputJob.Text = dataGridEmployee.Rows[e.RowIndex].Cells["JobID"].Value.ToString();
-                pictureBoxPhoto.ImageLocation = dataGridEmployee.Rows[e.RowIndex].Cells["Photo"].Value.ToString();
+                inputJob.SelectedValue = dataGridEmployee.Rows[e.RowIndex].Cells["JobID"].Value.ToString();
+                pictureBoxPhoto.ImageLocation = projectDir + dataGridEmployee.Rows[e.RowIndex].Cells["Photo"].Value.ToString();
 
                 btnUpdate.Tag = dataGridEmployee.Rows[e.RowIndex].Cells["ID"].Value.ToString();
                 btnDelete.Tag = dataGridEmployee.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+            }
+        }
+
+        private void inputUsername_Validating(object sender, CancelEventArgs e)
+        {
+            if (inputUsername.Text == "")
+            {
+                e.Cancel = true;
+                inputUsername.Focus();
             }
         }
     }

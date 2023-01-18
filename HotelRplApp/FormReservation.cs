@@ -106,13 +106,17 @@ namespace HotelRplApp
 
         private void FormReservation_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.ReservationCheckOut' table. You can move, or remove it, as needed.
+            this.reservationCheckOutTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.ReservationCheckOut);
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.Item' table. You can move, or remove it, as needed.
             this.itemTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.Item);
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.RoomType' table. You can move, or remove it, as needed.
             this.roomTypeTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.RoomType);
 
+            // list customer
             refreshCustomer();
 
+            // tabel item
             tableAdditionalItems.Columns.Add("ItemID");
             tableAdditionalItems.Columns.Add("Item");
             tableAdditionalItems.Columns.Add("Quantity");
@@ -120,6 +124,8 @@ namespace HotelRplApp
             tableAdditionalItems.Columns.Add("Sub Total");
 
             dataGridItem.DataSource = tableAdditionalItems;
+
+            // tombol remove untuk tabel item
             DataGridViewButtonColumn removeItemBtn = new DataGridViewButtonColumn();
             removeItemBtn.HeaderText = "Option";
             removeItemBtn.Text = "Remove";
@@ -353,6 +359,186 @@ namespace HotelRplApp
             {
                 conn.Close();
 
+            }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = Helper.getConnected();
+
+            if (optionAddNew.Checked)
+            {
+                try
+                {
+                    conn.Open();
+                    int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                    int birthDay = int.Parse(inputDateOfBirth.Value.ToString("yyyyMMdd"));
+
+                    int age = (now - birthDay) / 10000;
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Customer VALUES('" + inputCustomerName.Text + "', '" + inputNIK.Text + "', '" + inputEmail.Text + "', '" + inputGender.Text + "', '" + inputPhoneNumber.Text + "', '" + age + "')", conn);
+                    cmd.ExecuteNonQuery();
+
+                    refreshCustomer();
+                    optionSearch.Checked = true;
+                    //dataGridCustomer.Visible = true;
+                    //labelSearch.Visible = true;
+                    //inputSearchCustomer.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    throw;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void refreshCustomer()
+        {
+            SqlConnection conn = Helper.getConnected();
+
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Customer", conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridCustomer.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = Helper.getConnected();
+
+            if (optionAddNew.Checked)
+            {
+                try
+                {
+                    conn.Open();
+                    int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                    int birthDay = int.Parse(inputDateOfBirth.Value.ToString("yyyyMMdd"));
+
+                    int age = (now - birthDay) / 10000;
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Customer VALUES('" + inputCustomerName.Text + "', '" + inputNIK.Text + "', '" + inputEmail.Text + "', '" + inputGender.Text + "', '" + inputPhoneNumber.Text + "', '" + age + "')", conn);
+                    cmd.ExecuteNonQuery();
+
+                    refreshCustomer();
+                    optionSearch.Checked = true;
+                    //dataGridCustomer.Visible = true;
+                    //labelSearch.Visible = true;
+                    //inputSearchCustomer.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    throw;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void refreshCustomer()
+        {
+            SqlConnection conn = Helper.getConnected();
+
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Customer", conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridCustomer.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = Helper.getConnected();
+
+            if (optionAddNew.Checked)
+            {
+                try
+                {
+                    conn.Open();
+                    int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                    int birthDay = int.Parse(inputDateOfBirth.Value.ToString("yyyyMMdd"));
+
+                    int age = (now - birthDay) / 10000;
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Customer VALUES('" + inputCustomerName.Text + "', '" + inputNIK.Text + "', '" + inputEmail.Text + "', '" + inputGender.Text + "', '" + inputPhoneNumber.Text + "', '" + age + "')", conn);
+                    cmd.ExecuteNonQuery();
+
+                    refreshCustomer();
+                    optionSearch.Checked = true;
+                    //dataGridCustomer.Visible = true;
+                    //labelSearch.Visible = true;
+                    //inputSearchCustomer.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    throw;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void refreshCustomer()
+        {
+            SqlConnection conn = Helper.getConnected();
+
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Customer", conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridCustomer.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }
