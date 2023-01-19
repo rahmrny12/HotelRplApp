@@ -52,7 +52,7 @@ namespace HotelRplApp
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, RoomNumber, RoomFloor, RoomPrice, Description FROM ViewRoom WHERE RoomTypeID=" + inputRoomType.SelectedValue, conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, RoomNumber, RoomFloor, RoomPrice, Description FROM ViewRoom WHERE RoomTypeID='" + inputRoomType.SelectedValue + "'", conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 tableAvailableRoom = new DataTable();
                 da.Fill(tableAvailableRoom);
@@ -110,9 +110,11 @@ namespace HotelRplApp
             this.itemTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.Item);
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.RoomType' table. You can move, or remove it, as needed.
             this.roomTypeTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.RoomType);
+            inputItem.SelectedItem = null;
 
             refreshCustomer();
 
+            tableAdditionalItems.Columns.Add("RoomID");
             tableAdditionalItems.Columns.Add("ItemID");
             tableAdditionalItems.Columns.Add("Item");
             tableAdditionalItems.Columns.Add("Quantity");
@@ -120,6 +122,7 @@ namespace HotelRplApp
             tableAdditionalItems.Columns.Add("Sub Total");
 
             dataGridItem.DataSource = tableAdditionalItems;
+            dataGridItem.Columns["RoomID"].Visible = false;
             DataGridViewButtonColumn removeItemBtn = new DataGridViewButtonColumn();
             removeItemBtn.HeaderText = "Option";
             removeItemBtn.Text = "Remove";
@@ -188,6 +191,7 @@ namespace HotelRplApp
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             DataRow row = tableAdditionalItems.NewRow();
+            row["RoomID"] = dataGridSelectedRooms.CurrentRow.Cells["ID"].Value;
             row["ItemID"] = inputItem.SelectedValue;
             row["Item"] = inputItem.Text;
             row["Quantity"] = inputQuantity.Text;
@@ -245,17 +249,18 @@ namespace HotelRplApp
         {
             String CustomerID;
 
-            if (optionAddNew.Checked)
-            {
-                CustomerID = insertNewCustomer();
-            }
-            else
-            {
-                CustomerID = dataGridCustomer.CurrentRow.Cells["ID"].Value.ToString();
-            }
+            //insertRoomItems();
 
             if (dataGridSelectedRooms.Rows.Count != 0)
             {
+                if (optionAddNew.Checked)
+                {
+                    CustomerID = insertNewCustomer();
+                }
+                else
+                {
+                    CustomerID = dataGridCustomer.CurrentRow.Cells["ID"].Value.ToString();
+                }
                 insertNewReservation(CustomerID);
             }
             else
@@ -263,6 +268,20 @@ namespace HotelRplApp
                 MessageBox.Show("Select at least one room.");
             }
 
+        }
+
+        private void insertRoomItems()
+        {
+            using (SqlConnection conn = Helper.getConnected())
+            {
+                conn.Open();
+                foreach (DataGridViewRow item in dataGridItem.Rows)
+                {
+                    SqlCommand cmdAdditionalItem = new SqlCommand("INSERT INTO ReservationRequestItem VALUES('" + item.Cells["RoomID"].Value + "', '" + item.Cells["ItemID"].Value + "', '" + item.Cells["Quantity"].Value + "', '" + item.Cells["Sub Total"].Value + "')", conn);
+                    MessageBox.Show(cmdAdditionalItem.CommandText);
+                    cmdAdditionalItem.ExecuteNonQuery();
+                }
+            }
         }
 
         private void insertNewReservation(string customerID)
@@ -275,25 +294,32 @@ namespace HotelRplApp
                 string bookingCode = Helper.generateBookingCode();
                 SqlCommand cmdReservation = new SqlCommand("INSERT INTO Reservation OUTPUT inserted.ID VALUES('" + inputCheckIn.Text + "', '" + LoggedInUser.UserID + "', '" + customerID + "', '" + bookingCode + "')", conn);
                 SqlDataReader reservation = cmdReservation.ExecuteReader();
-                reservation.Read();
-                string reservationID = reservation["ID"].ToString();
-                reservation.Close();
-
-                foreach (DataGridViewRow room
-                    in dataGridSelectedRooms.Rows)
+                if (reservation.Read())
                 {
-                    SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom OUTPUT inserted.ID VALUES('" + reservationID + "', '" + room.Cells["ID"].Value + "', '" + inputCheckIn.Text + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '" + inputCheckIn.Text + "', '" + inputCheckOut.Text + "')", conn);
-                    SqlDataReader reservationRoom = cmdReservationRoom.ExecuteReader();
-                    reservationRoom.Read();
-                    string reservationRoomID = reservationRoom["ID"].ToString();
-                    reservationRoom.Close();
+                    string reservationID = reservation["ID"].ToString();
+                    reservation.Close();
 
-                    foreach (DataGridViewRow item in dataGridItem.Rows)
+                    foreach (DataGridViewRow room
+                        in dataGridSelectedRooms.Rows)
                     {
-                        SqlCommand cmdAdditionalItem = new SqlCommand("INSERT INTO ReservationRequestItem VALUES('" + reservationRoomID + "', '" + item.Cells["ItemID"].Value + "', '" + item.Cells["Quantity"].Value + "', '" + item.Cells["Sub Total"].Value + "')", conn);
-                        MessageBox.Show(cmdAdditionalItem.CommandText);
-                        cmdAdditionalItem.ExecuteNonQuery();
+                        SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom OUTPUT inserted.ID, inserted.RoomID VALUES('" + reservationID + "', '" + room.Cells["ID"].Value + "', '" + inputCheckIn.Text + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '" + inputCheckIn.Text + "', '" + inputCheckOut.Text + "')", conn);
+                        SqlDataReader reservationRoom = cmdReservationRoom.ExecuteReader();
+                        reservationRoom.Read();
+                        string reservationRoomID = reservationRoom["ID"].ToString();
+                        string roomID = reservationRoom["RoomID"].ToString();
+                        reservationRoom.Close();
+
+                        foreach (DataGridViewRow item in dataGridItem.Rows)
+                        {
+                            if (roomID == item.Cells["RoomID"].Value.ToString())
+                            {
+                                SqlCommand cmdAdditionalItem = new SqlCommand("INSERT INTO ReservationRequestItem VALUES('" + reservationRoomID + "', '" + item.Cells["ItemID"].Value + "', '" + item.Cells["Quantity"].Value + "', '" + item.Cells["Sub Total"].Value + "')", conn);
+                                MessageBox.Show(cmdAdditionalItem.CommandText);
+                                cmdAdditionalItem.ExecuteNonQuery();
+                            }
+                        }
                     }
+                    MessageBox.Show("New reservation added successfully!");
                 }
 
                 //foreach (DataGridViewRow item in dataGridItem.Rows)
@@ -301,7 +327,6 @@ namespace HotelRplApp
                 //    SqlCommand cmdReservationItem = new SqlCommand("INSERT INTO ReservationRequestItem VALUES('" +  + "')", conn);
                 //}
 
-                MessageBox.Show("New reservation added successfully!");
 
             }
             //}
@@ -326,7 +351,7 @@ namespace HotelRplApp
                 cmd.ExecuteNonQuery();
 
                 refreshCustomer();
-                SqlCommand cmdCustomerID = new SqlCommand("SELECT ID FROM Customer WHERE NIK=" + inputNIK.Text, conn);
+                SqlCommand cmdCustomerID = new SqlCommand("SELECT ID FROM Customer WHERE PhoneNumber=" + inputNIK.Text, conn);
                 SqlDataReader customer = cmdCustomerID.ExecuteReader();
                 customer.Read();
 

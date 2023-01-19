@@ -11,7 +11,7 @@ namespace HotelRplApp
     {
         public static SqlConnection getConnected()
         {
-            SqlConnection conn = new SqlConnection("Server=WIN-8OCI4IO48IN;initial catalog=DB_HOTEL_RPL;integrated security=true;");
+            SqlConnection conn = new SqlConnection("Server=DESKTOP-89MUICP;initial catalog=DB_HOTEL_RPL;integrated security=true;");
             return conn;
         }
 

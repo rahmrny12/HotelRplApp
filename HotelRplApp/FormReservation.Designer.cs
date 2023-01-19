@@ -65,6 +65,7 @@
             this.dataGridSelectedRooms = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.inputQuantity = new System.Windows.Forms.NumericUpDown();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.inputItem = new System.Windows.Forms.ComboBox();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -81,7 +82,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.itemTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.ItemTableAdapter();
-            this.inputQuantity = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -92,9 +92,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAvailableRooms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSelectedRooms)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -497,6 +497,24 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Request Additional Items";
             // 
+            // inputQuantity
+            // 
+            this.inputQuantity.Location = new System.Drawing.Point(96, 64);
+            this.inputQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.inputQuantity.Name = "inputQuantity";
+            this.inputQuantity.Size = new System.Drawing.Size(262, 22);
+            this.inputQuantity.TabIndex = 26;
+            this.inputQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.inputQuantity.ValueChanged += new System.EventHandler(this.inputQuantity_ValueChanged);
+            // 
             // btnAddItem
             // 
             this.btnAddItem.Location = new System.Drawing.Point(622, 89);
@@ -645,24 +663,6 @@
             // 
             this.itemTableAdapter.ClearBeforeFill = true;
             // 
-            // inputQuantity
-            // 
-            this.inputQuantity.Location = new System.Drawing.Point(96, 64);
-            this.inputQuantity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.inputQuantity.Name = "inputQuantity";
-            this.inputQuantity.Size = new System.Drawing.Size(262, 22);
-            this.inputQuantity.TabIndex = 26;
-            this.inputQuantity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.inputQuantity.ValueChanged += new System.EventHandler(this.inputQuantity_ValueChanged);
-            // 
             // FormReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -698,9 +698,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSelectedRooms)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inputQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inputQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

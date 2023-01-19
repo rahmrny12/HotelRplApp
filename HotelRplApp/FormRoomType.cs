@@ -151,10 +151,14 @@ namespace HotelRplApp
         {
             SqlConnection conn = Helper.getConnected();
             // randomize nama file
-            string extension = System.IO.Path.GetExtension(openPhotoDialog.FileName);
-            string newFileName = Guid.NewGuid().ToString() + extension;
-            // copy gambar ke folder image
-            System.IO.File.Copy(openPhotoDialog.FileName, projectDir + "\\Image\\RoomType\\" + newFileName);
+            string newFileName = "";
+            if (openPhotoDialog.FileName != "")
+            {
+                string extension = System.IO.Path.GetExtension(openPhotoDialog.FileName);
+                newFileName = Guid.NewGuid().ToString() + extension;
+                // copy gambar ke folder image
+                System.IO.File.Copy(openPhotoDialog.FileName, projectDir + "\\Image\\RoomType\\" + newFileName);
+            }
 
             openPhotoDialog.FileName = "";
 
@@ -207,7 +211,7 @@ namespace HotelRplApp
             SqlConnection conn = Helper.getConnected();
 
             try
-                {
+            {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE RoomType SET Name='" + inputName.Text + "', Capacity='" + inputCapacity.Text + "', RoomPrice='" + inputRoomPrice.Text + "', Photo='" + uploadDir + "' WHERE ID='" + btnUpdate.Tag + "'", conn);
                 cmd.ExecuteNonQuery();

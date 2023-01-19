@@ -51,6 +51,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB_HOTEL_RPLDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FormCheckIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCheckIn.Designer.cs">
+      <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRequestAdditionalItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRequestAdditionalItem.Designer.cs">
+      <DependentUpon>FormRequestAdditionalItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReservation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +115,9 @@
     <Compile Include="LoggedInUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormCheckIn.resx">
+      <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEmployee.resx">
       <DependentUpon>FormEmployee.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRequestAdditionalItem.resx">
+      <DependentUpon>FormRequestAdditionalItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormReservation.resx">
       <DependentUpon>FormReservation.cs</DependentUpon>
