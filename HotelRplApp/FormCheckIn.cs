@@ -13,6 +13,9 @@ namespace HotelRplApp
 {
     public partial class FormCheckIn : Form
     {
+        private string customerID;
+        private string selectedRoomCustomerID;
+
         public FormCheckIn()
         {
             InitializeComponent();
@@ -32,18 +35,23 @@ namespace HotelRplApp
         {
             if (inputSearchBooking.Text != "")
             {
-                using (SqlConnection conn = Helper.getConnected())
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM ViewRoomCheckIn WHERE BookingCode='" + inputSearchBooking.Text + "'", conn);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
+                loadExistRooms();
+            }
+        }
 
-                    dataGridRoom.DataSource = dt;
-                    dataGridRoom.Columns["BookingCode"].Visible = false;
-                }
+        private void loadExistRooms()
+        {
+            using (SqlConnection conn = Helper.getConnected())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ViewRoomCheckIn WHERE BookingCode='" + inputSearchBooking.Text + "' AND CheckInDateTime IS NULL", conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
+                dataGridRoom.DataSource = dt;
+                dataGridRoom.Columns["CustomerID"].Visible = false;
+                dataGridRoom.Columns["BookingCode"].Visible = false;
             }
         }
 
@@ -64,6 +72,7 @@ namespace HotelRplApp
                     SqlDataReader customer = cmd.ExecuteReader();
                     if (customer.Read())
                     {
+                        customerID = customer["ID"].ToString();
                         inputName.Text = customer["Name"].ToString();
                         inputEmail.Text = customer["Email"].ToString();
                         if (customer["Gender"].ToString() == "Male")
@@ -85,6 +94,43 @@ namespace HotelRplApp
 
 
 
+            }
+        }
+
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            if (selectedRoomCustomerID != null)
+            {
+                if (selectedRoomCustomerID == customerID)
+                {
+
+                    using (SqlConnection conn = Helper.getConnected())
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("UPDATE ReservationRoom SET CheckInDateTime='" + DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "' WHERE ID='" + dataGridRoom.CurrentRow.Cells[""].Value + "'", conn);
+                        cmd.ExecuteNonQuery();
+
+                        loadExistRooms();
+                        selectedRoomCustomerID = null;
+
+                        MessageBox.Show("Customer checked in successfully!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Customer is not registered with this booking code!");
+                }
+            } else
+            {
+                MessageBox.Show("Click any room to check in.");
+            }
+        }
+
+        private void dataGridRoom_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                selectedRoomCustomerID = dataGridRoom.Rows[e.RowIndex].Cells["CustomerID"].Value.ToString();
             }
         }
     }

@@ -122,6 +122,7 @@
             this.checkInToolStripMenuItem1.Name = "checkInToolStripMenuItem1";
             this.checkInToolStripMenuItem1.Size = new System.Drawing.Size(245, 26);
             this.checkInToolStripMenuItem1.Text = "Check In";
+            this.checkInToolStripMenuItem1.Click += new System.EventHandler(this.checkInToolStripMenuItem1_Click);
             // 
             // requestAdditionalItemToolStripMenuItem
             // 
@@ -147,13 +148,13 @@
             // checkInToolStripMenuItem
             // 
             this.checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
-            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.checkInToolStripMenuItem.Text = "Check In";
             // 
             // gustsToolStripMenuItem
             // 
             this.gustsToolStripMenuItem.Name = "gustsToolStripMenuItem";
-            this.gustsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.gustsToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.gustsToolStripMenuItem.Text = "Guests";
             // 
             // masterToolStripMenuItem
@@ -171,35 +172,35 @@
             // employeeToolStripMenuItem
             // 
             this.employeeToolStripMenuItem.Name = "employeeToolStripMenuItem";
-            this.employeeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.employeeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.employeeToolStripMenuItem.Text = "Employee";
             this.employeeToolStripMenuItem.Click += new System.EventHandler(this.employeeToolStripMenuItem_Click);
             // 
             // foodAndDrinkToolStripMenuItem
             // 
             this.foodAndDrinkToolStripMenuItem.Name = "foodAndDrinkToolStripMenuItem";
-            this.foodAndDrinkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.foodAndDrinkToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.foodAndDrinkToolStripMenuItem.Text = "Food and Drink";
             this.foodAndDrinkToolStripMenuItem.Click += new System.EventHandler(this.foodAndDrinkToolStripMenuItem_Click);
             // 
             // itemToolStripMenuItem
             // 
             this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.itemToolStripMenuItem.Text = "Item";
             this.itemToolStripMenuItem.Click += new System.EventHandler(this.itemToolStripMenuItem_Click);
             // 
             // roomTypeToolStripMenuItem
             // 
             this.roomTypeToolStripMenuItem.Name = "roomTypeToolStripMenuItem";
-            this.roomTypeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.roomTypeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.roomTypeToolStripMenuItem.Text = "Room Type";
             this.roomTypeToolStripMenuItem.Click += new System.EventHandler(this.roomTypeToolStripMenuItem_Click);
             // 
             // roomToolStripMenuItem
             // 
             this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-            this.roomToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.roomToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.roomToolStripMenuItem.Text = "Room";
             this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
             // 
@@ -236,6 +237,7 @@
             this.reservationToolStrip.Name = "reservationToolStrip";
             this.reservationToolStrip.Size = new System.Drawing.Size(90, 24);
             this.reservationToolStrip.Text = "Reservation";
+            this.reservationToolStrip.Click += new System.EventHandler(this.reservationToolStrip_Click);
             // 
             // checkOutToolStrip
             // 

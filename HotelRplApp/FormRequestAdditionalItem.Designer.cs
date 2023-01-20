@@ -40,8 +40,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridItem)).BeginInit();
@@ -93,6 +93,7 @@
             this.btnAddItem.TabIndex = 34;
             this.btnAddItem.Text = "Add";
             this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // inputItem
             // 
@@ -185,15 +186,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Room Occupied or Under Reservation";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Room Number :";
-            // 
             // comboBox1
             // 
             this.comboBox1.DisplayMember = "Name";
@@ -203,6 +195,15 @@
             this.comboBox1.Size = new System.Drawing.Size(262, 24);
             this.comboBox1.TabIndex = 35;
             this.comboBox1.ValueMember = "ID";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Room Number :";
             // 
             // FormRequestAdditionalItem
             // 

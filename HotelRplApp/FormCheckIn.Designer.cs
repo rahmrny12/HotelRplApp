@@ -127,6 +127,7 @@
             this.dataGridRoom.RowTemplate.Height = 24;
             this.dataGridRoom.Size = new System.Drawing.Size(470, 177);
             this.dataGridRoom.TabIndex = 0;
+            this.dataGridRoom.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRoom_CellClick);
             // 
             // groupBox3
             // 
@@ -329,6 +330,7 @@
             this.btnCheckIn.TabIndex = 3;
             this.btnCheckIn.Text = "Check In";
             this.btnCheckIn.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
             // FormCheckIn
             // 

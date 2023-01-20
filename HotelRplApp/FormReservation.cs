@@ -302,7 +302,7 @@ namespace HotelRplApp
                     foreach (DataGridViewRow room
                         in dataGridSelectedRooms.Rows)
                     {
-                        SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom OUTPUT inserted.ID, inserted.RoomID VALUES('" + reservationID + "', '" + room.Cells["ID"].Value + "', '" + inputCheckIn.Text + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '" + inputCheckIn.Text + "', '" + inputCheckOut.Text + "')", conn);
+                        SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom OUTPUT inserted.ID, inserted.RoomID VALUES('" + reservationID + "', '" + room.Cells["ID"].Value + "', '" + inputCheckIn.Text + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '', '')", conn);
                         SqlDataReader reservationRoom = cmdReservationRoom.ExecuteReader();
                         reservationRoom.Read();
                         string reservationRoomID = reservationRoom["ID"].ToString();

@@ -102,7 +102,19 @@ namespace HotelRplApp
         private void reservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormReservation formReservation = new FormReservation();
-            formReservation.Show();
+            formReservation.ShowDialog();
+        }
+
+        private void reservationToolStrip_Click(object sender, EventArgs e)
+        {
+            FormReservation formReservation = new FormReservation();
+            formReservation.ShowDialog();
+        }
+
+        private void checkInToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormCheckIn formCheckIn = new FormCheckIn();
+            formCheckIn.ShowDialog();
         }
     }
 }

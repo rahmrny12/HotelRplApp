@@ -16,7 +16,7 @@ namespace HotelRplApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormCheckIn());
+            Application.Run(new FormMain());
         }
     }
 }

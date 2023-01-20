@@ -26,5 +26,10 @@ namespace HotelRplApp
         {
 
         }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
