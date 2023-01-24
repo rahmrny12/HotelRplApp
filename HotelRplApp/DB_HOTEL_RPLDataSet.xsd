@@ -855,6 +855,142 @@ SELECT ID, Name, Capacity, RoomPrice, Photo FROM RoomType WHERE (ID = @ID)</Comm
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewAvailableRoomsTableAdapter" GeneratorDataComponentClassName="ViewAvailableRoomsTableAdapter" Name="ViewAvailableRooms" UserDataComponentName="ViewAvailableRoomsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_HOTEL_RPLConnectionString (Settings)" DbObjectName="DB_HOTEL_RPL.dbo.ViewAvailableRooms" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT RoomID, RoomNumber, RoomFloor, RoomPrice, Description, CheckInDateTime, CheckOutDateTime, RoomTypeID FROM dbo.ViewAvailableRooms</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="RoomID" DataSetColumn="RoomID" />
+              <Mapping SourceColumn="RoomNumber" DataSetColumn="RoomNumber" />
+              <Mapping SourceColumn="RoomFloor" DataSetColumn="RoomFloor" />
+              <Mapping SourceColumn="RoomPrice" DataSetColumn="RoomPrice" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="CheckInDateTime" DataSetColumn="CheckInDateTime" />
+              <Mapping SourceColumn="CheckOutDateTime" DataSetColumn="CheckOutDateTime" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewFoodsAndDrinksCheckOutTableAdapter" GeneratorDataComponentClassName="ViewFoodsAndDrinksCheckOutTableAdapter" Name="ViewFoodsAndDrinksCheckOut" UserDataComponentName="ViewFoodsAndDrinksCheckOutTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_HOTEL_RPLConnectionString (Settings)" DbObjectName="DB_HOTEL_RPL.dbo.ViewFoodsAndDrinksCheckOut" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ReservationRoomID, FDID, Name, Type, Price, Quantity, [Sub Total] FROM dbo.ViewFoodsAndDrinksCheckOut</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReservationRoomID" DataSetColumn="ReservationRoomID" />
+              <Mapping SourceColumn="FDID" DataSetColumn="FDID" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Type" DataSetColumn="Type" />
+              <Mapping SourceColumn="Price" DataSetColumn="Price" />
+              <Mapping SourceColumn="Quantity" DataSetColumn="Quantity" />
+              <Mapping SourceColumn="Sub Total" DataSetColumn="Sub Total" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewRoomTableAdapter" GeneratorDataComponentClassName="ViewRoomTableAdapter" Name="ViewRoom" UserDataComponentName="ViewRoomTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_HOTEL_RPLConnectionString (Settings)" DbObjectName="DB_HOTEL_RPL.dbo.ViewRoom" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ID, RoomTypeID, RoomNumber, RoomType, RoomFloor, Description, RoomPrice, Capacity FROM dbo.ViewRoom</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+              <Mapping SourceColumn="RoomNumber" DataSetColumn="RoomNumber" />
+              <Mapping SourceColumn="RoomType" DataSetColumn="RoomType" />
+              <Mapping SourceColumn="RoomFloor" DataSetColumn="RoomFloor" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="RoomPrice" DataSetColumn="RoomPrice" />
+              <Mapping SourceColumn="Capacity" DataSetColumn="Capacity" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewRoomCheckInTableAdapter" GeneratorDataComponentClassName="ViewRoomCheckInTableAdapter" Name="ViewRoomCheckIn" UserDataComponentName="ViewRoomCheckInTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_HOTEL_RPLConnectionString (Settings)" DbObjectName="DB_HOTEL_RPL.dbo.ViewRoomCheckIn" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ReservationRoomID, RoomID, BookingCode, RoomNumber, RoomFloor, RoomType, StartDate, CustomerID, CheckInDateTime, CheckOutDateTime FROM dbo.ViewRoomCheckIn</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReservationRoomID" DataSetColumn="ReservationRoomID" />
+              <Mapping SourceColumn="RoomID" DataSetColumn="RoomID" />
+              <Mapping SourceColumn="BookingCode" DataSetColumn="BookingCode" />
+              <Mapping SourceColumn="RoomNumber" DataSetColumn="RoomNumber" />
+              <Mapping SourceColumn="RoomFloor" DataSetColumn="RoomFloor" />
+              <Mapping SourceColumn="RoomType" DataSetColumn="RoomType" />
+              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
+              <Mapping SourceColumn="CustomerID" DataSetColumn="CustomerID" />
+              <Mapping SourceColumn="CheckInDateTime" DataSetColumn="CheckInDateTime" />
+              <Mapping SourceColumn="CheckOutDateTime" DataSetColumn="CheckOutDateTime" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewChartReportTableAdapter" GeneratorDataComponentClassName="ViewChartReportTableAdapter" Name="ViewChartReport" UserDataComponentName="ViewChartReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_HOTEL_RPLConnectionString (Settings)" DbObjectName="DB_HOTEL_RPL.dbo.ViewChartReport" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Name, CheckOutDateTime FROM dbo.ViewChartReport</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="CheckOutDateTime" DataSetColumn="CheckOutDateTime" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ViewReportTableAdapter" GeneratorDataComponentClassName="ViewReportTableAdapter" Name="ViewReport" UserDataComponentName="ViewReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_HOTEL_RPLConnectionString (Settings)" DbObjectName="DB_HOTEL_RPL.dbo.ViewReport" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ReservationRoomID, OrderNumber, BookingCode, ReservationDate, GuestName, RoomTypeName, RoomNumber, RoomPrice, CheckInDate, CheckOutDate, DaysLong FROM dbo.ViewReport</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReservationRoomID" DataSetColumn="ReservationRoomID" />
+              <Mapping SourceColumn="OrderNumber" DataSetColumn="OrderNumber" />
+              <Mapping SourceColumn="BookingCode" DataSetColumn="BookingCode" />
+              <Mapping SourceColumn="ReservationDate" DataSetColumn="ReservationDate" />
+              <Mapping SourceColumn="GuestName" DataSetColumn="GuestName" />
+              <Mapping SourceColumn="RoomTypeName" DataSetColumn="RoomTypeName" />
+              <Mapping SourceColumn="RoomNumber" DataSetColumn="RoomNumber" />
+              <Mapping SourceColumn="RoomPrice" DataSetColumn="RoomPrice" />
+              <Mapping SourceColumn="CheckInDate" DataSetColumn="CheckInDate" />
+              <Mapping SourceColumn="CheckOutDate" DataSetColumn="CheckOutDate" />
+              <Mapping SourceColumn="DaysLong" DataSetColumn="DaysLong" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -1148,6 +1284,196 @@ SELECT ID, Name, Capacity, RoomPrice, Photo FROM RoomType WHERE (ID = @ID)</Comm
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="ViewAvailableRooms" msprop:Generator_TableClassName="ViewAvailableRoomsDataTable" msprop:Generator_TableVarName="tableViewAvailableRooms" msprop:Generator_TablePropName="ViewAvailableRooms" msprop:Generator_RowDeletingName="ViewAvailableRoomsRowDeleting" msprop:Generator_RowChangingName="ViewAvailableRoomsRowChanging" msprop:Generator_RowEvHandlerName="ViewAvailableRoomsRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewAvailableRoomsRowDeleted" msprop:Generator_UserTableName="ViewAvailableRooms" msprop:Generator_RowChangedName="ViewAvailableRoomsRowChanged" msprop:Generator_RowEvArgName="ViewAvailableRoomsRowChangeEvent" msprop:Generator_RowClassName="ViewAvailableRoomsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RoomID" msprop:Generator_ColumnVarNameInTable="columnRoomID" msprop:Generator_ColumnPropNameInRow="RoomID" msprop:Generator_ColumnPropNameInTable="RoomIDColumn" msprop:Generator_UserColumnName="RoomID" type="xs:int" />
+              <xs:element name="RoomNumber" msprop:Generator_ColumnVarNameInTable="columnRoomNumber" msprop:Generator_ColumnPropNameInRow="RoomNumber" msprop:Generator_ColumnPropNameInTable="RoomNumberColumn" msprop:Generator_UserColumnName="RoomNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomFloor" msprop:Generator_ColumnVarNameInTable="columnRoomFloor" msprop:Generator_ColumnPropNameInRow="RoomFloor" msprop:Generator_ColumnPropNameInTable="RoomFloorColumn" msprop:Generator_UserColumnName="RoomFloor">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomPrice" msprop:Generator_ColumnVarNameInTable="columnRoomPrice" msprop:Generator_ColumnPropNameInRow="RoomPrice" msprop:Generator_ColumnPropNameInTable="RoomPriceColumn" msprop:Generator_UserColumnName="RoomPrice" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CheckInDateTime" msprop:Generator_ColumnVarNameInTable="columnCheckInDateTime" msprop:Generator_ColumnPropNameInRow="CheckInDateTime" msprop:Generator_ColumnPropNameInTable="CheckInDateTimeColumn" msprop:Generator_UserColumnName="CheckInDateTime" type="xs:dateTime" />
+              <xs:element name="CheckOutDateTime" msprop:Generator_ColumnVarNameInTable="columnCheckOutDateTime" msprop:Generator_ColumnPropNameInRow="CheckOutDateTime" msprop:Generator_ColumnPropNameInTable="CheckOutDateTimeColumn" msprop:Generator_UserColumnName="CheckOutDateTime" type="xs:dateTime" />
+              <xs:element name="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" msprop:Generator_UserColumnName="RoomTypeID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewFoodsAndDrinksCheckOut" msprop:Generator_TableClassName="ViewFoodsAndDrinksCheckOutDataTable" msprop:Generator_TableVarName="tableViewFoodsAndDrinksCheckOut" msprop:Generator_TablePropName="ViewFoodsAndDrinksCheckOut" msprop:Generator_RowDeletingName="ViewFoodsAndDrinksCheckOutRowDeleting" msprop:Generator_RowChangingName="ViewFoodsAndDrinksCheckOutRowChanging" msprop:Generator_RowEvHandlerName="ViewFoodsAndDrinksCheckOutRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewFoodsAndDrinksCheckOutRowDeleted" msprop:Generator_UserTableName="ViewFoodsAndDrinksCheckOut" msprop:Generator_RowChangedName="ViewFoodsAndDrinksCheckOutRowChanged" msprop:Generator_RowEvArgName="ViewFoodsAndDrinksCheckOutRowChangeEvent" msprop:Generator_RowClassName="ViewFoodsAndDrinksCheckOutRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReservationRoomID" msprop:Generator_ColumnVarNameInTable="columnReservationRoomID" msprop:Generator_ColumnPropNameInRow="ReservationRoomID" msprop:Generator_ColumnPropNameInTable="ReservationRoomIDColumn" msprop:Generator_UserColumnName="ReservationRoomID" type="xs:int" />
+              <xs:element name="FDID" msprop:Generator_ColumnVarNameInTable="columnFDID" msprop:Generator_ColumnPropNameInRow="FDID" msprop:Generator_ColumnPropNameInTable="FDIDColumn" msprop:Generator_UserColumnName="FDID" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:int" />
+              <xs:element name="Quantity" msprop:Generator_ColumnVarNameInTable="columnQuantity" msprop:Generator_ColumnPropNameInRow="Quantity" msprop:Generator_ColumnPropNameInTable="QuantityColumn" msprop:Generator_UserColumnName="Quantity" type="xs:int" minOccurs="0" />
+              <xs:element name="Sub_x0020_Total" msprop:Generator_ColumnVarNameInTable="columnSub_Total" msprop:Generator_ColumnPropNameInRow="Sub_Total" msprop:Generator_ColumnPropNameInTable="Sub_TotalColumn" msprop:Generator_UserColumnName="Sub Total" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewRoom" msprop:Generator_TableClassName="ViewRoomDataTable" msprop:Generator_TableVarName="tableViewRoom" msprop:Generator_TablePropName="ViewRoom" msprop:Generator_RowDeletingName="ViewRoomRowDeleting" msprop:Generator_RowChangingName="ViewRoomRowChanging" msprop:Generator_RowEvHandlerName="ViewRoomRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewRoomRowDeleted" msprop:Generator_UserTableName="ViewRoom" msprop:Generator_RowChangedName="ViewRoomRowChanged" msprop:Generator_RowEvArgName="ViewRoomRowChangeEvent" msprop:Generator_RowClassName="ViewRoomRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" msprop:Generator_UserColumnName="RoomTypeID" type="xs:int" />
+              <xs:element name="RoomNumber" msprop:Generator_ColumnVarNameInTable="columnRoomNumber" msprop:Generator_ColumnPropNameInRow="RoomNumber" msprop:Generator_ColumnPropNameInTable="RoomNumberColumn" msprop:Generator_UserColumnName="RoomNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomType" msprop:Generator_ColumnVarNameInTable="columnRoomType" msprop:Generator_ColumnPropNameInRow="RoomType" msprop:Generator_ColumnPropNameInTable="RoomTypeColumn" msprop:Generator_UserColumnName="RoomType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomFloor" msprop:Generator_ColumnVarNameInTable="columnRoomFloor" msprop:Generator_ColumnPropNameInRow="RoomFloor" msprop:Generator_ColumnPropNameInTable="RoomFloorColumn" msprop:Generator_UserColumnName="RoomFloor">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomPrice" msprop:Generator_ColumnVarNameInTable="columnRoomPrice" msprop:Generator_ColumnPropNameInRow="RoomPrice" msprop:Generator_ColumnPropNameInTable="RoomPriceColumn" msprop:Generator_UserColumnName="RoomPrice" type="xs:int" />
+              <xs:element name="Capacity" msprop:Generator_ColumnVarNameInTable="columnCapacity" msprop:Generator_ColumnPropNameInRow="Capacity" msprop:Generator_ColumnPropNameInTable="CapacityColumn" msprop:Generator_UserColumnName="Capacity" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewRoomCheckIn" msprop:Generator_TableClassName="ViewRoomCheckInDataTable" msprop:Generator_TableVarName="tableViewRoomCheckIn" msprop:Generator_TablePropName="ViewRoomCheckIn" msprop:Generator_RowDeletingName="ViewRoomCheckInRowDeleting" msprop:Generator_RowChangingName="ViewRoomCheckInRowChanging" msprop:Generator_RowEvHandlerName="ViewRoomCheckInRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewRoomCheckInRowDeleted" msprop:Generator_UserTableName="ViewRoomCheckIn" msprop:Generator_RowChangedName="ViewRoomCheckInRowChanged" msprop:Generator_RowEvArgName="ViewRoomCheckInRowChangeEvent" msprop:Generator_RowClassName="ViewRoomCheckInRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReservationRoomID" msprop:Generator_ColumnVarNameInTable="columnReservationRoomID" msprop:Generator_ColumnPropNameInRow="ReservationRoomID" msprop:Generator_ColumnPropNameInTable="ReservationRoomIDColumn" msprop:Generator_UserColumnName="ReservationRoomID" type="xs:int" />
+              <xs:element name="RoomID" msprop:Generator_ColumnVarNameInTable="columnRoomID" msprop:Generator_ColumnPropNameInRow="RoomID" msprop:Generator_ColumnPropNameInTable="RoomIDColumn" msprop:Generator_UserColumnName="RoomID" type="xs:int" />
+              <xs:element name="BookingCode" msprop:Generator_ColumnVarNameInTable="columnBookingCode" msprop:Generator_ColumnPropNameInRow="BookingCode" msprop:Generator_ColumnPropNameInTable="BookingCodeColumn" msprop:Generator_UserColumnName="BookingCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomNumber" msprop:Generator_ColumnVarNameInTable="columnRoomNumber" msprop:Generator_ColumnPropNameInRow="RoomNumber" msprop:Generator_ColumnPropNameInTable="RoomNumberColumn" msprop:Generator_UserColumnName="RoomNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomFloor" msprop:Generator_ColumnVarNameInTable="columnRoomFloor" msprop:Generator_ColumnPropNameInRow="RoomFloor" msprop:Generator_ColumnPropNameInTable="RoomFloorColumn" msprop:Generator_UserColumnName="RoomFloor">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomType" msprop:Generator_ColumnVarNameInTable="columnRoomType" msprop:Generator_ColumnPropNameInRow="RoomType" msprop:Generator_ColumnPropNameInTable="RoomTypeColumn" msprop:Generator_UserColumnName="RoomType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CustomerID" msprop:Generator_ColumnVarNameInTable="columnCustomerID" msprop:Generator_ColumnPropNameInRow="CustomerID" msprop:Generator_ColumnPropNameInTable="CustomerIDColumn" msprop:Generator_UserColumnName="CustomerID" type="xs:int" />
+              <xs:element name="CheckInDateTime" msprop:Generator_ColumnVarNameInTable="columnCheckInDateTime" msprop:Generator_ColumnPropNameInRow="CheckInDateTime" msprop:Generator_ColumnPropNameInTable="CheckInDateTimeColumn" msprop:Generator_UserColumnName="CheckInDateTime" type="xs:dateTime" />
+              <xs:element name="CheckOutDateTime" msprop:Generator_ColumnVarNameInTable="columnCheckOutDateTime" msprop:Generator_ColumnPropNameInRow="CheckOutDateTime" msprop:Generator_ColumnPropNameInTable="CheckOutDateTimeColumn" msprop:Generator_UserColumnName="CheckOutDateTime" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewChartReport" msprop:Generator_TableClassName="ViewChartReportDataTable" msprop:Generator_TableVarName="tableViewChartReport" msprop:Generator_TablePropName="ViewChartReport" msprop:Generator_RowDeletingName="ViewChartReportRowDeleting" msprop:Generator_RowChangingName="ViewChartReportRowChanging" msprop:Generator_RowEvHandlerName="ViewChartReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewChartReportRowDeleted" msprop:Generator_UserTableName="ViewChartReport" msprop:Generator_RowChangedName="ViewChartReportRowChanged" msprop:Generator_RowEvArgName="ViewChartReportRowChangeEvent" msprop:Generator_RowClassName="ViewChartReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CheckOutDateTime" msprop:Generator_ColumnVarNameInTable="columnCheckOutDateTime" msprop:Generator_ColumnPropNameInRow="CheckOutDateTime" msprop:Generator_ColumnPropNameInTable="CheckOutDateTimeColumn" msprop:Generator_UserColumnName="CheckOutDateTime" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ViewReport" msprop:Generator_TableClassName="ViewReportDataTable" msprop:Generator_TableVarName="tableViewReport" msprop:Generator_TablePropName="ViewReport" msprop:Generator_RowDeletingName="ViewReportRowDeleting" msprop:Generator_RowChangingName="ViewReportRowChanging" msprop:Generator_RowEvHandlerName="ViewReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ViewReportRowDeleted" msprop:Generator_UserTableName="ViewReport" msprop:Generator_RowChangedName="ViewReportRowChanged" msprop:Generator_RowEvArgName="ViewReportRowChangeEvent" msprop:Generator_RowClassName="ViewReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReservationRoomID" msprop:Generator_ColumnVarNameInTable="columnReservationRoomID" msprop:Generator_ColumnPropNameInRow="ReservationRoomID" msprop:Generator_ColumnPropNameInTable="ReservationRoomIDColumn" msprop:Generator_UserColumnName="ReservationRoomID" type="xs:int" />
+              <xs:element name="OrderNumber" msprop:Generator_ColumnVarNameInTable="columnOrderNumber" msprop:Generator_ColumnPropNameInRow="OrderNumber" msprop:Generator_ColumnPropNameInTable="OrderNumberColumn" msprop:Generator_UserColumnName="OrderNumber" type="xs:int" />
+              <xs:element name="BookingCode" msprop:Generator_ColumnVarNameInTable="columnBookingCode" msprop:Generator_ColumnPropNameInRow="BookingCode" msprop:Generator_ColumnPropNameInTable="BookingCodeColumn" msprop:Generator_UserColumnName="BookingCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ReservationDate" msprop:Generator_ColumnVarNameInTable="columnReservationDate" msprop:Generator_ColumnPropNameInRow="ReservationDate" msprop:Generator_ColumnPropNameInTable="ReservationDateColumn" msprop:Generator_UserColumnName="ReservationDate" type="xs:dateTime" />
+              <xs:element name="GuestName" msprop:Generator_ColumnVarNameInTable="columnGuestName" msprop:Generator_ColumnPropNameInRow="GuestName" msprop:Generator_ColumnPropNameInTable="GuestNameColumn" msprop:Generator_UserColumnName="GuestName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomTypeName" msprop:Generator_ColumnVarNameInTable="columnRoomTypeName" msprop:Generator_ColumnPropNameInRow="RoomTypeName" msprop:Generator_ColumnPropNameInTable="RoomTypeNameColumn" msprop:Generator_UserColumnName="RoomTypeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomNumber" msprop:Generator_ColumnVarNameInTable="columnRoomNumber" msprop:Generator_ColumnPropNameInRow="RoomNumber" msprop:Generator_ColumnPropNameInTable="RoomNumberColumn" msprop:Generator_UserColumnName="RoomNumber">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomPrice" msprop:Generator_ColumnVarNameInTable="columnRoomPrice" msprop:Generator_ColumnPropNameInRow="RoomPrice" msprop:Generator_ColumnPropNameInTable="RoomPriceColumn" msprop:Generator_UserColumnName="RoomPrice" type="xs:int" />
+              <xs:element name="CheckInDate" msprop:Generator_ColumnVarNameInTable="columnCheckInDate" msprop:Generator_ColumnPropNameInRow="CheckInDate" msprop:Generator_ColumnPropNameInTable="CheckInDateColumn" msprop:Generator_UserColumnName="CheckInDate" type="xs:dateTime" />
+              <xs:element name="CheckOutDate" msprop:Generator_ColumnVarNameInTable="columnCheckOutDate" msprop:Generator_ColumnPropNameInRow="CheckOutDate" msprop:Generator_ColumnPropNameInTable="CheckOutDateColumn" msprop:Generator_UserColumnName="CheckOutDate" type="xs:dateTime" />
+              <xs:element name="DaysLong" msprop:Generator_ColumnVarNameInTable="columnDaysLong" msprop:Generator_ColumnPropNameInRow="DaysLong" msprop:Generator_ColumnPropNameInTable="DaysLongColumn" msprop:Generator_UserColumnName="DaysLong" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -1202,6 +1528,22 @@ SELECT ID, Name, Capacity, RoomPrice, Photo FROM RoomType WHERE (ID = @ID)</Comm
       <xs:selector xpath=".//mstns:RoomType" />
       <xs:field xpath="mstns:ID" />
     </xs:unique>
+    <xs:unique name="ViewAvailableRooms_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ViewAvailableRooms" />
+      <xs:field xpath="mstns:RoomID" />
+    </xs:unique>
+    <xs:unique name="ViewFoodsAndDrinksCheckOut_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ViewFoodsAndDrinksCheckOut" />
+      <xs:field xpath="mstns:ReservationRoomID" />
+    </xs:unique>
+    <xs:unique name="ViewRoom_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ViewRoom" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="ViewRoomCheckIn_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ViewRoomCheckIn" />
+      <xs:field xpath="mstns:ReservationRoomID" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
@@ -1219,6 +1561,9 @@ SELECT ID, Name, Capacity, RoomPrice, Photo FROM RoomType WHERE (ID = @ID)</Comm
       <msdata:Relationship name="FK_ReservationRoom_Reservation" msdata:parent="Reservation" msdata:child="ReservationRoom" msdata:parentkey="ID" msdata:childkey="ReservationID" msprop:Generator_UserChildTable="ReservationRoom" msprop:Generator_ChildPropName="GetReservationRoomRows" msprop:Generator_UserRelationName="FK_ReservationRoom_Reservation" msprop:Generator_ParentPropName="ReservationRow" msprop:Generator_RelationVarName="relationFK_ReservationRoom_Reservation" msprop:Generator_UserParentTable="Reservation" />
       <msdata:Relationship name="FK_ReservationRoom_Room" msdata:parent="Room" msdata:child="ReservationRoom" msdata:parentkey="ID" msdata:childkey="RoomID" msprop:Generator_UserChildTable="ReservationRoom" msprop:Generator_ChildPropName="GetReservationRoomRows" msprop:Generator_UserRelationName="FK_ReservationRoom_Room" msprop:Generator_RelationVarName="relationFK_ReservationRoom_Room" msprop:Generator_UserParentTable="Room" msprop:Generator_ParentPropName="RoomRow" />
       <msdata:Relationship name="FK_Room_RoomType" msdata:parent="RoomType" msdata:child="Room" msdata:parentkey="ID" msdata:childkey="RoomTypeID" msprop:Generator_UserChildTable="Room" msprop:Generator_ChildPropName="GetRoomRows" msprop:Generator_UserRelationName="FK_Room_RoomType" msprop:Generator_RelationVarName="relationFK_Room_RoomType" msprop:Generator_UserParentTable="RoomType" msprop:Generator_ParentPropName="RoomTypeRow" />
+      <msdata:Relationship name="FK_FDCheckOut_Reservation1" msdata:parent="ReservationRoom" msdata:child="FDCheckOut" msdata:parentkey="ID" msdata:childkey="ReservationRoomID" msprop:Generator_UserChildTable="FDCheckOut" msprop:Generator_ChildPropName="GetFDCheckOutRows" msprop:Generator_UserRelationName="FK_FDCheckOut_Reservation1" msprop:Generator_RelationVarName="relationFK_FDCheckOut_Reservation1" msprop:Generator_UserParentTable="ReservationRoom" msprop:Generator_ParentPropName="ReservationRoomRow" />
+      <msdata:Relationship name="FK_ReservationCheckOut_ReservationRoom" msdata:parent="ReservationRoom" msdata:child="ReservationCheckOut" msdata:parentkey="ID" msdata:childkey="ReservationRoomID" msprop:Generator_UserChildTable="ReservationCheckOut" msprop:Generator_ChildPropName="GetReservationCheckOutRows" msprop:Generator_UserRelationName="FK_ReservationCheckOut_ReservationRoom" msprop:Generator_RelationVarName="relationFK_ReservationCheckOut_ReservationRoom" msprop:Generator_UserParentTable="ReservationRoom" msprop:Generator_ParentPropName="ReservationRoomRow" />
+      <msdata:Relationship name="FK_ReservationRequestItem_ReservationRoom" msdata:parent="ReservationRoom" msdata:child="ReservationRequestItem" msdata:parentkey="ID" msdata:childkey="ReservationRoomID" msprop:Generator_UserChildTable="ReservationRequestItem" msprop:Generator_ChildPropName="GetReservationRequestItemRows" msprop:Generator_UserRelationName="FK_ReservationRequestItem_ReservationRoom" msprop:Generator_RelationVarName="relationFK_ReservationRequestItem_ReservationRoom" msprop:Generator_UserParentTable="ReservationRoom" msprop:Generator_ParentPropName="ReservationRoomRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

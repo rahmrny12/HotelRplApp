@@ -404,6 +404,7 @@
             this.inputRoomType.Size = new System.Drawing.Size(290, 24);
             this.inputRoomType.TabIndex = 27;
             this.inputRoomType.ValueMember = "ID";
+            this.inputRoomType.SelectedIndexChanged += new System.EventHandler(this.inputRoomType_SelectedIndexChanged);
             // 
             // roomTypeBindingSource
             // 

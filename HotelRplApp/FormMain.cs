@@ -116,5 +116,41 @@ namespace HotelRplApp
             FormCheckIn formCheckIn = new FormCheckIn();
             formCheckIn.ShowDialog();
         }
+
+        private void checkOutToolStrip_Click(object sender, EventArgs e)
+        {
+            FormCheckOut formCheckOut = new FormCheckOut();
+            formCheckOut.ShowDialog();
+        }
+
+        private void checkInToolStrip_Click(object sender, EventArgs e)
+        {
+            FormCheckIn formCheckIn = new FormCheckIn();
+            formCheckIn.ShowDialog();
+        }
+
+        private void checkOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCheckOut formCheckOut = new FormCheckOut();
+            formCheckOut.ShowDialog();
+        }
+
+        private void gustsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            FormReportChart formReportChart = new FormReportChart();
+            formReportChart.ShowDialog();
+        }
+
+        private void checkInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReport formReport = new FormReport();
+            formReport.ShowDialog();
+        }
+
+        private void timerToolStrip_Tick(object sender, EventArgs e)
+        {
+            labelDateAndTime.Text = DateTime.Now.ToString();
+        }
     }
 }

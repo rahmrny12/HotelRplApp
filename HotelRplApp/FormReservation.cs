@@ -52,23 +52,26 @@ namespace HotelRplApp
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, RoomNumber, RoomFloor, RoomPrice, Description FROM ViewRoom WHERE RoomTypeID='" + inputRoomType.SelectedValue + "'", conn);
+                SqlCommand cmd = new SqlCommand("GetAvailableRooms @RoomID, @CheckInDate", conn);
+                cmd.Parameters.AddWithValue("@RoomID", inputRoomType.SelectedValue);
+                cmd.Parameters.AddWithValue("@CheckInDate", inputCheckIn.Text);
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 tableAvailableRoom = new DataTable();
                 da.Fill(tableAvailableRoom);
 
                 dataGridAvailableRooms.DataSource = tableAvailableRoom;
-                dataGridAvailableRooms.Columns["ID"].Visible = false;
+                dataGridAvailableRooms.Columns["RoomID"].Visible = false;
 
                 tableSelectedRoom = tableAvailableRoom.Clone();
                 dataGridSelectedRooms.DataSource = tableSelectedRoom;
-                dataGridSelectedRooms.Columns["ID"].Visible = false;
+                dataGridSelectedRooms.Columns["RoomID"].Visible = false;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-                throw;
-            }
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message.ToString());
+            //    throw;
+            //}
             finally
             {
                 conn.Close();
@@ -83,7 +86,7 @@ namespace HotelRplApp
             if (row != null)
             {
                 DataRow newRow = tableSelectedRoom.NewRow();
-                newRow["ID"] = row.Cells["ID"].Value;
+                newRow["RoomID"] = row.Cells["RoomID"].Value;
                 newRow["RoomNumber"] = row.Cells["RoomNumber"].Value;
                 newRow["RoomFloor"] = row.Cells["RoomFloor"].Value;
                 newRow["RoomPrice"] = row.Cells["RoomPrice"].Value;
@@ -138,7 +141,7 @@ namespace HotelRplApp
             if (row != null)
             {
                 DataRow newRow = tableAvailableRoom.NewRow();
-                newRow["ID"] = row.Cells["ID"].Value;
+                newRow["RoomID"] = row.Cells["RoomID"].Value;
                 newRow["RoomNumber"] = row.Cells["RoomNumber"].Value;
                 newRow["RoomFloor"] = row.Cells["RoomFloor"].Value;
                 newRow["RoomPrice"] = row.Cells["RoomPrice"].Value;
@@ -191,7 +194,7 @@ namespace HotelRplApp
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             DataRow row = tableAdditionalItems.NewRow();
-            row["RoomID"] = dataGridSelectedRooms.CurrentRow.Cells["ID"].Value;
+            row["RoomID"] = dataGridSelectedRooms.CurrentRow.Cells["RoomID"].Value;
             row["ItemID"] = inputItem.SelectedValue;
             row["Item"] = inputItem.Text;
             row["Quantity"] = inputQuantity.Text;
@@ -302,7 +305,7 @@ namespace HotelRplApp
                     foreach (DataGridViewRow room
                         in dataGridSelectedRooms.Rows)
                     {
-                        SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom OUTPUT inserted.ID, inserted.RoomID VALUES('" + reservationID + "', '" + room.Cells["ID"].Value + "', '" + inputCheckIn.Text + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '', '')", conn);
+                        SqlCommand cmdReservationRoom = new SqlCommand("INSERT INTO ReservationRoom (ReservationID, RoomID, DurationNights, RoomPrice, CheckInDateTime, CheckOutDateTime) OUTPUT inserted.ID, inserted.RoomID VALUES('" + reservationID + "', '" + room.Cells["RoomID"].Value + "', '" + inputStaying.Text + "', '" + room.Cells["RoomPrice"].Value + "', '" + inputCheckIn.Text + "', '" + inputCheckOut.Text + "')", conn);
                         SqlDataReader reservationRoom = cmdReservationRoom.ExecuteReader();
                         reservationRoom.Read();
                         string reservationRoomID = reservationRoom["ID"].ToString();
@@ -403,6 +406,11 @@ namespace HotelRplApp
         }
 
         private void inputCheckIn_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inputRoomType_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

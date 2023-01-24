@@ -135,6 +135,7 @@
             this.checkOutToolStripMenuItem.Name = "checkOutToolStripMenuItem";
             this.checkOutToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
             this.checkOutToolStripMenuItem.Text = "Check Out";
+            this.checkOutToolStripMenuItem.Click += new System.EventHandler(this.checkOutToolStripMenuItem_Click);
             // 
             // reportToolStripMenuItem
             // 
@@ -150,12 +151,14 @@
             this.checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
             this.checkInToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.checkInToolStripMenuItem.Text = "Check In";
+            this.checkInToolStripMenuItem.Click += new System.EventHandler(this.checkInToolStripMenuItem_Click);
             // 
             // gustsToolStripMenuItem
             // 
             this.gustsToolStripMenuItem.Name = "gustsToolStripMenuItem";
             this.gustsToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.gustsToolStripMenuItem.Text = "Guests";
+            this.gustsToolStripMenuItem.Click += new System.EventHandler(this.gustsToolStripMenuItem_Click);
             // 
             // masterToolStripMenuItem
             // 
@@ -230,6 +233,7 @@
             this.checkInToolStrip.Name = "checkInToolStrip";
             this.checkInToolStrip.Size = new System.Drawing.Size(68, 24);
             this.checkInToolStrip.Text = "Check In";
+            this.checkInToolStrip.Click += new System.EventHandler(this.checkInToolStrip_Click);
             // 
             // reservationToolStrip
             // 
@@ -245,6 +249,7 @@
             this.checkOutToolStrip.Name = "checkOutToolStrip";
             this.checkOutToolStrip.Size = new System.Drawing.Size(80, 24);
             this.checkOutToolStrip.Text = "Check Out";
+            this.checkOutToolStrip.Click += new System.EventHandler(this.checkOutToolStrip_Click);
             // 
             // employeeToolStrip
             // 
@@ -295,6 +300,11 @@
             this.labelJob.Name = "labelJob";
             this.labelJob.Size = new System.Drawing.Size(53, 24);
             this.labelJob.Text = "Admin";
+            // 
+            // timerToolStrip
+            // 
+            this.timerToolStrip.Enabled = true;
+            this.timerToolStrip.Tick += new System.EventHandler(this.timerToolStrip_Tick);
             // 
             // FormMain
             // 

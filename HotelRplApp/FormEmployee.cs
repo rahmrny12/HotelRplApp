@@ -290,8 +290,12 @@ namespace HotelRplApp
             if (inputUsername.Text == "")
             {
                 e.Cancel = true;
-                inputUsername.Focus();
             }
+        }
+
+        private void inputJob_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

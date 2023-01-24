@@ -44,7 +44,7 @@ namespace HotelRplApp
             using (SqlConnection conn = Helper.getConnected())
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM ViewRoomCheckIn WHERE BookingCode='" + inputSearchBooking.Text + "' AND CheckInDateTime IS NULL", conn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ViewRoomCheckIn WHERE BookingCode='" + inputSearchBooking.Text + "' AND StartDate IS NULL", conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -107,7 +107,7 @@ namespace HotelRplApp
                     using (SqlConnection conn = Helper.getConnected())
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand("UPDATE ReservationRoom SET CheckInDateTime='" + DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "' WHERE ID='" + dataGridRoom.CurrentRow.Cells[""].Value + "'", conn);
+                        SqlCommand cmd = new SqlCommand("UPDATE ReservationRoom SET StartDateTime='" + DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "' WHERE ID='" + dataGridRoom.CurrentRow.Cells["ReservationRoomID"].Value + "'", conn);
                         cmd.ExecuteNonQuery();
 
                         loadExistRooms();
