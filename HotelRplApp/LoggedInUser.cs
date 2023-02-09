@@ -10,8 +10,8 @@ namespace HotelRplApp
     static class LoggedInUser
     {
         public static string UserID = "1";
-        public static string Name;
-        public static string Username;
-        public static string JobID;
+        public static string Name = "Mas Rendy";
+        public static string Username = "rendy";
+        public static string JobID = "2";
     }
 }

@@ -19,19 +19,22 @@ namespace HotelRplApp
 
         private void FormReport_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'DB_HOTEL_RPLDataSet.ViewReport' table. You can move, or remove it, as needed.
-            this.ViewReportTableAdapter.Fill(this.DB_HOTEL_RPLDataSet.ViewReport);
-
-            reportViewer1.LocalReport.ReportEmbeddedResource = "HotelRplApp.ReservationCheckIn.rdlc";
-            reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("ReservationDataSet", (DataTable) DB_HOTEL_RPLDataSet.ViewReport));
-            reportViewer1.RefreshReport();
-
-            inputCheckInToday.Text = DateTime.Now.ToString("dd-MMM-yyyy");
+            inputToday.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         }
 
-        private void btnPreview_Click(object sender, EventArgs e)
+        private void btnGoPreview_Click(object sender, EventArgs e)
         {
+            FormReportPreview formReportPreview;
 
+            if (btnCheckInToday.Checked)
+            {
+                formReportPreview = new FormReportPreview(DateTime.Parse(inputToday.Text), DateTime.Parse(inputToday.Text));
+            } else
+            {
+                formReportPreview = new FormReportPreview(inputDateFrom.Value, inputDateTo.Value);
+            }
+            formReportPreview.ShowDialog();
+            this.Close();
         }
     }
 }

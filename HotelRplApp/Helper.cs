@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 namespace HotelRplApp
 {
@@ -13,6 +14,23 @@ namespace HotelRplApp
         {
             SqlConnection conn = new SqlConnection("Server=DESKTOP-89MUICP;initial catalog=DB_HOTEL_RPL;integrated security=true;");
             return conn;
+        }
+
+        public static string hashPassword(String pass)
+        {
+            using (var algorithm = SHA256.Create())
+            {
+                var bytes = Encoding.UTF8.GetBytes(pass);
+                var hash = algorithm.ComputeHash(bytes);
+
+                StringBuilder hashedPass = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    hashedPass.Append(hash[i].ToString("X2"));
+                }
+                
+                return hashedPass.ToString();
+            }
         }
 
         public static string generateBookingCode()

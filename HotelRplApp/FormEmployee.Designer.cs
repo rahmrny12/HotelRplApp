@@ -307,12 +307,15 @@
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Image = global::HotelRplApp.Properties.Resources.icons8_close_94;
             this.btnDelete.Location = new System.Drawing.Point(15, 108);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(151, 34);
             this.btnDelete.TabIndex = 23;
             this.btnDelete.Text = "Delete";
+            this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -320,12 +323,15 @@
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdate.Image = global::HotelRplApp.Properties.Resources.icons8_edit_94;
             this.btnUpdate.Location = new System.Drawing.Point(15, 66);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(151, 34);
             this.btnUpdate.TabIndex = 22;
             this.btnUpdate.Text = "Update";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
@@ -333,12 +339,16 @@
             // 
             this.btnInsert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInsert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnInsert.Image = global::HotelRplApp.Properties.Resources.icons8_add_942;
             this.btnInsert.Location = new System.Drawing.Point(15, 26);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(151, 34);
+            this.btnInsert.Size = new System.Drawing.Size(150, 34);
             this.btnInsert.TabIndex = 21;
             this.btnInsert.Text = "Insert";
+            this.btnInsert.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnInsert.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnInsert.UseVisualStyleBackColor = true;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
@@ -362,8 +372,9 @@
             this.dataGridEmployee.Location = new System.Drawing.Point(16, 519);
             this.dataGridEmployee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridEmployee.Name = "dataGridEmployee";
+            this.dataGridEmployee.RowHeadersWidth = 51;
             this.dataGridEmployee.RowTemplate.Height = 24;
-            this.dataGridEmployee.Size = new System.Drawing.Size(677, 206);
+            this.dataGridEmployee.Size = new System.Drawing.Size(695, 206);
             this.dataGridEmployee.TabIndex = 22;
             this.dataGridEmployee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEmployee_CellClick);
             // 
@@ -380,7 +391,7 @@
             this.inputJob.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputJob.FormattingEnabled = true;
             this.inputJob.Location = new System.Drawing.Point(188, 208);
-            this.inputJob.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputJob.Margin = new System.Windows.Forms.Padding(4);
             this.inputJob.Name = "inputJob";
             this.inputJob.Size = new System.Drawing.Size(324, 26);
             this.inputJob.TabIndex = 23;

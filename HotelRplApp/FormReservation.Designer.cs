@@ -79,9 +79,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.roomTypeTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.RoomTypeTableAdapter();
-            this.label17 = new System.Windows.Forms.Label();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.itemTableAdapter = new HotelRplApp.DB_HOTEL_RPLDataSetTableAdapters.ItemTableAdapter();
+            this.printNota = new System.Drawing.Printing.PrintDocument();
+            this.printDocumentNota = new System.Drawing.Printing.PrintDocument();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCustomer)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -133,9 +135,11 @@
             this.dataGridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCustomer.Location = new System.Drawing.Point(13, 64);
             this.dataGridCustomer.Name = "dataGridCustomer";
+            this.dataGridCustomer.RowHeadersWidth = 51;
             this.dataGridCustomer.RowTemplate.Height = 24;
             this.dataGridCustomer.Size = new System.Drawing.Size(559, 185);
             this.dataGridCustomer.TabIndex = 26;
+            this.dataGridCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCustomer_CellContentClick);
             // 
             // inputDateOfBirth
             // 
@@ -170,6 +174,7 @@
             this.inputSearchCustomer.Name = "inputSearchCustomer";
             this.inputSearchCustomer.Size = new System.Drawing.Size(294, 22);
             this.inputSearchCustomer.TabIndex = 20;
+            this.inputSearchCustomer.TextChanged += new System.EventHandler(this.inputSearchCustomer_TextChanged);
             // 
             // labelSearch
             // 
@@ -278,7 +283,6 @@
             this.label7.Size = new System.Drawing.Size(117, 17);
             this.label7.TabIndex = 6;
             this.label7.Text = "Customer Name :";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // inputNIK
             // 
@@ -341,7 +345,6 @@
             this.inputCheckOut.Name = "inputCheckOut";
             this.inputCheckOut.Size = new System.Drawing.Size(285, 22);
             this.inputCheckOut.TabIndex = 24;
-            this.inputCheckOut.ValueChanged += new System.EventHandler(this.inputCheckOut_ValueChanged);
             // 
             // inputCheckIn
             // 
@@ -350,7 +353,7 @@
             this.inputCheckIn.Name = "inputCheckIn";
             this.inputCheckIn.Size = new System.Drawing.Size(285, 22);
             this.inputCheckIn.TabIndex = 23;
-            this.inputCheckIn.ValueChanged += new System.EventHandler(this.inputCheckIn_ValueChanged);
+            this.inputCheckIn.ValueChanged += new System.EventHandler(this.inputStaying_ValueChanged);
             // 
             // label3
             // 
@@ -404,7 +407,6 @@
             this.inputRoomType.Size = new System.Drawing.Size(290, 24);
             this.inputRoomType.TabIndex = 27;
             this.inputRoomType.ValueMember = "ID";
-            this.inputRoomType.SelectedIndexChanged += new System.EventHandler(this.inputRoomType_SelectedIndexChanged);
             // 
             // roomTypeBindingSource
             // 
@@ -424,7 +426,7 @@
             this.btnSearch.TabIndex = 8;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearchRoom_Click);
             // 
             // label4
             // 
@@ -452,6 +454,7 @@
             this.dataGridAvailableRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridAvailableRooms.Location = new System.Drawing.Point(25, 309);
             this.dataGridAvailableRooms.Name = "dataGridAvailableRooms";
+            this.dataGridAvailableRooms.RowHeadersWidth = 51;
             this.dataGridAvailableRooms.RowTemplate.Height = 24;
             this.dataGridAvailableRooms.Size = new System.Drawing.Size(443, 150);
             this.dataGridAvailableRooms.TabIndex = 22;
@@ -463,10 +466,10 @@
             this.dataGridSelectedRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridSelectedRooms.Location = new System.Drawing.Point(603, 309);
             this.dataGridSelectedRooms.Name = "dataGridSelectedRooms";
+            this.dataGridSelectedRooms.RowHeadersWidth = 51;
             this.dataGridSelectedRooms.RowTemplate.Height = 24;
             this.dataGridSelectedRooms.Size = new System.Drawing.Size(436, 150);
             this.dataGridSelectedRooms.TabIndex = 24;
-            this.dataGridSelectedRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // label13
             // 
@@ -514,7 +517,7 @@
             0,
             0,
             0});
-            this.inputQuantity.ValueChanged += new System.EventHandler(this.inputQuantity_ValueChanged);
+            this.inputQuantity.ValueChanged += new System.EventHandler(this.inputQuantity_TextChanged);
             // 
             // btnAddItem
             // 
@@ -539,6 +542,7 @@
             this.inputItem.TabIndex = 28;
             this.inputItem.ValueMember = "ID";
             this.inputItem.SelectedIndexChanged += new System.EventHandler(this.inputItem_SelectedIndexChanged);
+            this.inputItem.TextChanged += new System.EventHandler(this.inputItem_SelectedIndexChanged);
             // 
             // itemBindingSource
             // 
@@ -552,10 +556,10 @@
             this.dataGridItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridItem.Location = new System.Drawing.Point(14, 91);
             this.dataGridItem.Name = "dataGridItem";
+            this.dataGridItem.RowHeadersWidth = 51;
             this.dataGridItem.RowTemplate.Height = 24;
             this.dataGridItem.Size = new System.Drawing.Size(602, 119);
             this.dataGridItem.TabIndex = 34;
-            this.dataGridItem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridItem_CellContentClick);
             // 
             // inputSubTotal
             // 
@@ -565,7 +569,6 @@
             this.inputSubTotal.Name = "inputSubTotal";
             this.inputSubTotal.Size = new System.Drawing.Size(236, 22);
             this.inputSubTotal.TabIndex = 32;
-            this.inputSubTotal.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label16
             // 
@@ -586,7 +589,6 @@
             this.inputPrice.Name = "inputPrice";
             this.inputPrice.Size = new System.Drawing.Size(236, 22);
             this.inputPrice.TabIndex = 30;
-            this.inputPrice.TextChanged += new System.EventHandler(this.inputPrice_TextChanged);
             // 
             // label15
             // 
@@ -623,7 +625,7 @@
             this.button1.TabIndex = 28;
             this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.btnAddRoom_Click);
             // 
             // button2
             // 
@@ -633,22 +635,22 @@
             this.button2.TabIndex = 29;
             this.button2.Text = "<<";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.btnRemoveRoom_Click);
             // 
             // roomTypeTableAdapter
             // 
             this.roomTypeTableAdapter.ClearBeforeFill = true;
             // 
-            // label17
+            // labelTotal
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(779, 494);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(144, 17);
-            this.label17.TabIndex = 33;
-            this.label17.Text = "Total Price : 1400000";
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Location = new System.Drawing.Point(779, 494);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(144, 17);
+            this.labelTotal.TabIndex = 33;
+            this.labelTotal.Text = "Total Price : 1400000";
             // 
             // btnSubmit
             // 
@@ -670,7 +672,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 713);
             this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.label17);
+            this.Controls.Add(this.labelTotal);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
@@ -753,7 +755,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.DataGridView dataGridItem;
         private System.Windows.Forms.ComboBox inputItem;
@@ -762,5 +764,7 @@
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.NumericUpDown inputStaying;
         private System.Windows.Forms.NumericUpDown inputQuantity;
+        private System.Drawing.Printing.PrintDocument printNota;
+        private System.Drawing.Printing.PrintDocument printDocumentNota;
     }
 }

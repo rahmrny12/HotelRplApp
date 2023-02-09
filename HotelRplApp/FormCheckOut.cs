@@ -41,8 +41,6 @@ namespace HotelRplApp
             this.itemStatusTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.ItemStatus);
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.Item' table. You can move, or remove it, as needed.
             this.itemTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.Item);
-            // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.ReservationRoom' table. You can move, or remove it, as needed.
-            this.reservationRoomTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.ReservationRoom);
             // TODO: This line of code loads data into the 'dB_HOTEL_RPLDataSet.Room' table. You can move, or remove it, as needed.
             this.roomTableAdapter.Fill(this.dB_HOTEL_RPLDataSet.Room);
 
@@ -188,7 +186,6 @@ namespace HotelRplApp
                     SqlCommand cmd = new SqlCommand("INSERT INTO ReservationCheckOut VALUES('" + reservationRoomID + "', '" + item.Cells["ItemID"].Value + "', '" + item.Cells["ItemStatusID"].Value + "', '" + item.Cells["Quantity"].Value + "', '" + item.Cells["Sub Total"].Value + "')", conn);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Checkout successful!");
             }
         }
     }
